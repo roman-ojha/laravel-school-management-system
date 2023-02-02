@@ -12,6 +12,8 @@
 
 <body>
     @yield('main')
+
+    @yield('script')
 </body>
 
 </html>

@@ -1,7 +1,7 @@
 @extends('layout.global')
 
 @section('css')
-    @vite('resources/css/admin/index.css')
+    {{-- @vite('resources/css/') --}}
 @endsection
 
 @section('title', 'admin')
