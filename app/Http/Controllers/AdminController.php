@@ -10,4 +10,9 @@ class AdminController extends Controller
     {
         return view('admin/index');
     }
+
+    public function students()
+    {
+        return view('admin/students');
+    }
 }
