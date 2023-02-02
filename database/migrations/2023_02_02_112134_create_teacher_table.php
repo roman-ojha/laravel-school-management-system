@@ -12,12 +12,12 @@ return new class () extends Migration {
      */
     public function up()
     {
-        Schema::create('student', function (Blueprint $table) {
+        Schema::create('teacher', function (Blueprint $table) {
             $table->id();
             $table->char("name", 100);
-            $table->integer("roll");
-            $table->date("batch");
-            // $table->char("faculty", 100); // as table
+            // $table->char("faculty",100); // faculty as table
+            // Subject // teacher <-- many-to-many--> subject
+            $table->integer("salary");
             $table->timestamps();
         });
     }
@@ -29,6 +29,6 @@ return new class () extends Migration {
      */
     public function down()
     {
-        Schema::dropIfExists('student');
+        Schema::dropIfExists('teacher');
     }
 };
