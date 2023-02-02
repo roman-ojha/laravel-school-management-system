@@ -12,10 +12,12 @@ return new class () extends Migration {
      */
     public function up()
     {
-        Schema::create('library_student', function (Blueprint $table) {
+        Schema::create('books', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('student_id')->constrained('student');
-            $table->foreignId('library_id')->constrained('library');
+            $table->char("name", 50);
+            $table->char("publication", 70);
+            $table->date("release-on");
+            $table->integer("page");
             $table->timestamps();
         });
     }
@@ -27,6 +29,6 @@ return new class () extends Migration {
      */
     public function down()
     {
-        Schema::dropIfExists('library_student');
+        Schema::dropIfExists('books');
     }
 };

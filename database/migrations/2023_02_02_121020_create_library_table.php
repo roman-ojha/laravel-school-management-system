@@ -14,7 +14,7 @@ return new class () extends Migration {
     {
         Schema::create('library', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('book_id')->constrained('book');
+            $table->foreignId('book_id')->constrained('books');
             $table->integer('quantity');
             $table->boolean('is_available');
             $table->timestamps();

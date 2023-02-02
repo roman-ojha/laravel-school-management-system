@@ -24,6 +24,22 @@
             border-width: 1px;
             cursor: pointer;
         }
+
+        .error {
+            color: red;
+        }
+
+        .students-button {
+            border: 2px solid black;
+            padding: 5px 10px;
+            border-radius: 5px;
+            margin-top: 10px;
+        }
+
+        .students-button a {
+            text-decoration: none;
+            color: black;
+        }
     </style>
 @endsection
 
@@ -49,6 +65,17 @@
             <input type="submit" value="Add">
         </div>
     </form>
+
+    {{-- @if ($error)
+        <h1>Error</h1>
+    @endif --}}
+    @if (!empty($error))
+        <p class="error">{{ $error }}</p>
+    @endif
+
+    <div class="students-button">
+        <a href="{{ route('admin.students') }}">Show Students</a>
+    </div>
 @endsection
 
 @section('script')

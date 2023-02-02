@@ -12,12 +12,11 @@ return new class () extends Migration {
      */
     public function up()
     {
-        Schema::create('teacher', function (Blueprint $table) {
+        Schema::create('teachers_faculties', function (Blueprint $table) {
             $table->id();
-            $table->char("name", 100);
-            // $table->char("faculty",100); // faculty as table
-            // Subject // teacher <-- many-to-many--> subject
-            $table->integer("salary");
+            $table->foreignId('teacher_id')->constrained('teachers');
+            $table->unsignedBigInteger('faculty_id');
+            $table->foreign('faculty_id')->references('id')->on('faculties');
             $table->timestamps();
         });
     }
@@ -29,6 +28,6 @@ return new class () extends Migration {
      */
     public function down()
     {
-        Schema::dropIfExists('teacher');
+        Schema::dropIfExists('teachers_faculties');
     }
 };

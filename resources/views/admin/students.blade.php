@@ -4,13 +4,64 @@
     @vite('resources/css/admin/students.css')
 @endsection
 
+@section('style')
+    @parent
+    <style>
+        .add-button {
+            border: 2px solid black;
+            padding: 5px 10px;
+            border-radius: 5px;
+            margin-bottom: 10px;
+        }
+
+        .add-button a {
+            text-decoration: none;
+            color: black;
+        }
+
+        th,
+        td {
+            padding: 5px 10px;
+        }
+
+        #delete-button {
+            border-radius: 5px;
+            padding: 5px 7px;
+            background-color: red;
+            color: white;
+            border-width: 0px;
+            cursor: pointer;
+        }
+    </style>
+@endsection
+
 @section('title', 'admin')
 
 @section('main')
     <h1>Students</h1>
-    <div>
+    <div class="add-button">
         <a href="{{ route('admin.add.student') }}">Add new Student</a>
     </div>
+
+    <table border="1">
+        <tr>
+            <th>Roll</th>
+            <th>Name</th>
+            <th>Batch</th>
+            {{-- <th>Faculty</th> --}}
+            <th>Delete</th>
+        </tr>
+        @foreach ($students as $student)
+            <tr>
+                <td>{{ $student['roll'] }}</td>
+                <td>{{ $student['name'] }}</td>
+                <td>{{ $student['batch'] }}</td>
+                <td>
+                    <button id="delete-button">Delete</button>
+                </td>
+            </tr>
+        @endforeach
+    </table>
 @endsection
 
 @section('script')

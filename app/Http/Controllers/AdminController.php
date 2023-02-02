@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Student;
+use Exception;
 
 class AdminController extends Controller
 {
@@ -13,17 +15,34 @@ class AdminController extends Controller
 
     public function students()
     {
-        return view('admin/students');
+        // $students = Student::all();
+        $students = Student::all();
+        return view('admin/students', ['students'=>$students]);
     }
 
     public function create_student(Request $req)
     {
-        // return view('admin/add_student');
-        $name = $req->input()['name'];
-        $roll = $req->input()['roll'];
-        $batch = $req->input()['batch'];
-        error_log($name.$roll.$batch);
+        try {
+            if (!$req->filled('name')||!$req->filled('roll')||!$req->filled('batch')) {
+                return view('admin/add_student', ['error'=>'All field is required']);
+            }
+            $name = $req->input('name');
+            $roll = $req->input('roll');
+            $batch = $req->input()['batch'];
 
-        return redirect()->route('admin.students');
+            $student = new Student();
+            $student->name = $name;
+            $student->roll = $roll;
+            $student->batch = $batch;
+            // Todo...
+            $student->faculty_id = 1;
+            $saved = $student->save();
+            if (!$saved) {
+                return view('admin/add_student', ['error'=>'Server Error!!!']);
+            }
+            return redirect()->route('admin.students');
+        } catch(Exception $err) {
+            return view('admin/add_student', ['error'=>'Server Error!!!']);
+        }
     }
 }

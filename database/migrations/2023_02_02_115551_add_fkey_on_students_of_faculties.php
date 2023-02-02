@@ -12,11 +12,10 @@ return new class () extends Migration {
      */
     public function up()
     {
-        Schema::create('teacher_subject', function (Blueprint $table) {
-            $table->id();
-            $table->foreignId('teacher_id')->constrained('teacher');
-            $table->foreignId('subject_id')->constrained('subject');
-            $table->timestamps();
+        //
+        Schema::table('students', function (Blueprint $table) {
+            $table->unsignedBigInteger('faculty_id');
+            $table->foreign('faculty_id')->references('id')->on('faculties');
         });
     }
 
@@ -27,6 +26,9 @@ return new class () extends Migration {
      */
     public function down()
     {
-        Schema::dropIfExists('teacher_subject');
+        Schema::table('students', function (Blueprint $table) {
+            $table->dropForeign(['faculty_id']);
+            $table->dropColumn('faculty_id');
+        });
     }
 };
