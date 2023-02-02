@@ -8,6 +8,15 @@
     <link rel="stylesheet" href={{ asset('style.css') }} />
     @yield('css')
     <title>@yield('title')</title>
+
+    @section('default-style')
+        <style>
+            body {
+                display: grid;
+                place-items: center;
+            }
+        </style>
+    @show
 </head>
 
 <body>

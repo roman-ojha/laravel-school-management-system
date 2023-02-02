@@ -15,4 +15,9 @@ class AdminController extends Controller
     {
         return view('admin/students');
     }
+
+    public function create_student()
+    {
+        return view('admin/add_student');
+    }
 }
