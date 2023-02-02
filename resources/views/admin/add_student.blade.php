@@ -5,13 +5,33 @@
 @endsection
 
 @section('style')
+    @parent
+    <style>
+        form {
+            border: 2px solid black;
+            padding: 10px;
+            border-radius: 10px;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        input[type="submit"] {
+            padding: 10px;
+            border-radius: 5px;
+            border-width: 1px;
+            cursor: pointer;
+        }
+    </style>
 @endsection
 
 @section('title', 'admin')
 
 @section('main')
     <h1>Add new Student</h1>
-    <form action="" method="POST">
+    <form action="{{ route('admin.add.student') }}" method="POST">
         @csrf
         <div>
             <label for="name">Name</label>

@@ -9,7 +9,7 @@
     @yield('css')
     <title>@yield('title')</title>
 
-    @section('default-style')
+    @section('style')
         <style>
             body {
                 display: grid;
