@@ -60,23 +60,7 @@
             const studentsListComponent = document.getElementById(
                 "students-list-component"
             );
-            console.log(resHtml);
-            studentsListComponent.innerHtml = "fdsa"
+            studentsListComponent.innerHTML = resHtml;
         }
-        $(document).ready(function() {
-            $(document).on("click", ".delete-button", function() {
-                var studentId = $(this).data("id");
-
-                $.ajax({
-                    url: `/admin/student/${studentId}`,
-                    type: "GET",
-                    success: function(data) {
-                        console.log(data);
-                        $(document).find('#students-list-component').children().replaceWith(
-                            data);
-                    }
-                });
-            })
-        })
     </script>
 @endsection

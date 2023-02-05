@@ -12,7 +12,8 @@
             <td>{{ $student['name'] }}</td>
             <td>{{ $student['batch'] }}</td>
             <td>
-                <button class="delete-button" data-id="{{ $student['id'] }}">Delete</button>
+                <button class="delete-button" onclick="deleteStudent('{{ $student['id'] }}')"
+                    data-id="{{ $student['id'] }}">Delete</button>
             </td>
         </tr>
     @endforeach
