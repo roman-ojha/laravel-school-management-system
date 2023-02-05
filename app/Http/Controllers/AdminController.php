@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Student;
 use Exception;
-use Ramsey\Uuid\Type\Integer;
+use App\View\Components\StudentsList;
 
 class AdminController extends Controller
 {
@@ -51,5 +51,10 @@ class AdminController extends Controller
     {
         $student = Student::find($id);
         $student->delete();
+
+        $newStudents = Student::all();
+
+        $studentsListComp = new StudentsList($newStudents);
+        $studentsListComp->render();
     }
 }

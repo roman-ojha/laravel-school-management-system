@@ -11,9 +11,10 @@ class StudentsList extends Component
      *
      * @return void
      */
-    public function __construct()
+    public $students;
+    public function __construct($students)
     {
-        //
+        $this->students = $students;
     }
 
     /**
