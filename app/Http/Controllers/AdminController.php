@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Student;
 use Exception;
+use Ramsey\Uuid\Type\Integer;
 
 class AdminController extends Controller
 {
@@ -44,5 +45,11 @@ class AdminController extends Controller
         } catch(Exception $err) {
             return view('admin/add_student', ['error'=>'Server Error!!!']);
         }
+    }
+
+    public function delete_student(Request $req, $id)
+    {
+        $student = Student::find($id);
+        $student->delete();
     }
 }
