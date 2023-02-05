@@ -24,7 +24,7 @@
             padding: 5px 10px;
         }
 
-        #delete-button {
+        .delete-button {
             border-radius: 5px;
             padding: 5px 7px;
             background-color: red;
@@ -42,9 +42,41 @@
     <div class="add-button">
         <a href="{{ route('admin-view-add-student') }}">Add new Student</a>
     </div>
-    <x-students-list :students="$students" />
+    <div id="students-list-component">
+        <x-students-list :students="$students" />
+    </div>
 
 @endsection
 
 @section('script')
+    <script type="text/javascript">
+        async function deleteStudent(id) {
+            // delete according to given id
+            const res = await fetch(`/admin/student/${id}`, {
+                method: "GET",
+            });
+
+            const resHtml = await res.text();
+            const studentsListComponent = document.getElementById(
+                "students-list-component"
+            );
+            console.log(resHtml);
+            studentsListComponent.innerHtml = "fdsa"
+        }
+        $(document).ready(function() {
+            $(document).on("click", ".delete-button", function() {
+                var studentId = $(this).data("id");
+
+                $.ajax({
+                    url: `/admin/student/${studentId}`,
+                    type: "GET",
+                    success: function(data) {
+                        console.log(data);
+                        $(document).find('#students-list-component').children().replaceWith(
+                            data);
+                    }
+                });
+            })
+        })
+    </script>
 @endsection

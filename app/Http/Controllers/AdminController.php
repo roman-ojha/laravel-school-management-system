@@ -43,6 +43,7 @@ class AdminController extends Controller
             }
             return redirect()->route('admin.students');
         } catch(Exception $err) {
+            error_log($err);
             return view('admin/add_student', ['error'=>'Server Error!!!']);
         }
     }
@@ -54,7 +55,8 @@ class AdminController extends Controller
 
         $newStudents = Student::all();
 
-        $studentsListComp = new StudentsList($newStudents);
-        $studentsListComp->render();
+        // $studentsListComp = new StudentsList($newStudents);
+        // return $studentsListComp->render();
+        return view('components.students-list', ['students'=>$newStudents]);
     }
 }
