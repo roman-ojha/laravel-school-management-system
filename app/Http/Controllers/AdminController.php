@@ -59,4 +59,9 @@ class AdminController extends Controller
         // return $studentsListComp->render();
         return view('components.students-list', ['students'=>$newStudents]);
     }
+
+    public function teachers()
+    {
+        return view('admin.teachers');
+    }
 }
