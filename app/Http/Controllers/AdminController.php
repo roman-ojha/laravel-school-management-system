@@ -5,7 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Student;
 use Exception;
-use App\View\Components\StudentsList;
+// use App\View\Components\StudentsList;
+use App\Models\Teacher;
 
 class AdminController extends Controller
 {
@@ -62,6 +63,7 @@ class AdminController extends Controller
 
     public function teachers()
     {
-        return view('admin.teachers');
+        $teachers = Teacher::all();
+        return view('admin.teachers', ['teachers'=>$teachers]);
     }
 }
