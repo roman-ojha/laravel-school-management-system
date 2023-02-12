@@ -13,4 +13,5 @@ Route::group(['prefix'=>'admin'], function () {
     });
     Route::post('/student', [AdminController::class,'create_student'])->name('admin-add-student');
     Route::get('/student/{id}', [AdminController::class,'delete_student'])->name('admin-delete-student');
+    Route::post('/teacher', [AdminController::class,'create_teacher'])->name('admin-add-teacher');
 });

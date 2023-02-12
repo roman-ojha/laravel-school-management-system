@@ -46,7 +46,7 @@
 
 @section('main')
     <h1>Add Teacher</h1>
-    <form action="" method="POST">
+    <form action="{{ route('admin-add-teacher') }}" method="POST">
         @csrf
         <div>
             <label for="name">Name</label>

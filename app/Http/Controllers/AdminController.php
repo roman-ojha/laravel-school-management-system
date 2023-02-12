@@ -42,9 +42,9 @@ class AdminController extends Controller
             if (!$saved) {
                 return view('admin/add_student', ['error'=>'Server Error!!!']);
             }
-            return redirect()->route('admin.students');
+            return redirect()->route('admin-students');
         } catch(Exception $err) {
-            error_log($err);
+            // error_log($err);
             return view('admin/add_student', ['error'=>'Server Error!!!']);
         }
     }
@@ -65,5 +65,24 @@ class AdminController extends Controller
     {
         $teachers = Teacher::all();
         return view('admin.teachers', ['teachers'=>$teachers]);
+    }
+
+    public function create_teacher(Request $req)
+    {
+        try {
+            if (!$req->filled('name')||!$req->filled('salary')) {
+                return view('admin/add_teacher', ['error'=>"All field is required"]);
+            }
+            $teacher = new Teacher();
+            $teacher->name = $req->input('name');
+            $teacher->salary = $req->input('salary');
+            $saved = $teacher->save();
+            if (!$saved) {
+                return view('admin/add_teacher', ['error'=>'Server Error!!!']);
+            }
+            return redirect()->route('admin-teachers');
+        } catch(Exception $err) {
+            return view('admin/add_teacher', ['error'=>'Server Error!!!']);
+        }
     }
 }

@@ -9,7 +9,8 @@
 @section('main')
     <h1>Admin</h1>
 
-    <a href="{{ route('admin-students') }}">Student</a>
+    <a href="{{ route('admin-students') }}">Students</a>
+    <a href="{{ route('admin-teachers') }}">Teachers</a>
 @endsection
 
 @section('script')
