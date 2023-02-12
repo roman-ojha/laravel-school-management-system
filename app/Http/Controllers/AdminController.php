@@ -22,7 +22,7 @@ class AdminController extends Controller
         return view('admin/students', ['students'=>$students]);
     }
 
-    public function create_student(Request $req)
+    public function add_student(Request $req)
     {
         try {
             if (!$req->filled('name')||!$req->filled('roll')||!$req->filled('batch')) {
@@ -67,7 +67,7 @@ class AdminController extends Controller
         return view('admin.teachers', ['teachers'=>$teachers]);
     }
 
-    public function create_teacher(Request $req)
+    public function add_teacher(Request $req)
     {
         try {
             if (!$req->filled('name')||!$req->filled('salary')) {
@@ -83,6 +83,18 @@ class AdminController extends Controller
             return redirect()->route('admin-teachers');
         } catch(Exception $err) {
             return view('admin/add_teacher', ['error'=>'Server Error!!!']);
+        }
+    }
+
+    public function delete_teacher(Request $req, $id)
+    {
+        try {
+            Teacher::find($id)->delete();
+
+            $new_teachers = Teacher::all();
+
+            return view('components.teachers-list', ['teachers'=>$new_teachers]);
+        } catch(Exception $err) {
         }
     }
 }
