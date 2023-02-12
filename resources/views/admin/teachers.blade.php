@@ -40,7 +40,7 @@
 @section('main')
     <h1>Teachers</h1>
     <div class="add-button">
-        <a href="{{ route('admin-view-add-student') }}">Add new teacher</a>
+        <a href="{{ route('admin-view-add-teacher') }}">Add new teacher</a>
     </div>
 
     <table border="1">
