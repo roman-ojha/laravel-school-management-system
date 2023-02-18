@@ -97,4 +97,9 @@ class AdminController extends Controller
         } catch(Exception $err) {
         }
     }
+
+    public function books()
+    {
+        return view('admin.books');
+    }
 }

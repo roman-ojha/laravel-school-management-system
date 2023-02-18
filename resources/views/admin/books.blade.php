@@ -5,12 +5,12 @@
 @endsection
 
 @section('style')
-
 @endsection
 
-@section('title', 'dymmy')
+@section('title', 'books')
 
 @section('main')
+    <h1>Books</h1>
 @endsection
 
 @section('script')

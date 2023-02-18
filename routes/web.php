@@ -16,4 +16,7 @@ Route::group(['prefix'=>'admin'], function () {
     Route::view('/teacher', 'admin/add_teacher')->name('admin-view-add-teacher');
     Route::post('/teacher', [AdminController::class,'add_teacher'])->name('admin-add-teacher');
     Route::delete('/teacher/{id}', [AdminController::class,'delete_teacher'])->name('admin-delete-teacher');
+
+    // Books:
+    Route::get('/books', [AdminController::class,'books'])->name('admin-books');
 });
