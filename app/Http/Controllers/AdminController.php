@@ -103,4 +103,25 @@ class AdminController extends Controller
         $books = Book::all();
         return view('admin.books', ['books'=>$books]);
     }
+
+    public function add_book(Request $req)
+    {
+        try {
+            if (!$req->filled('name')||!$req->filled('publication')||!$req->filled('released_on')||!$req->filled('page')) {
+                return view('admin/add_book', ['error'=>"All Field is required"]);
+            }
+            $book = new Book();
+            $book->name = $req->input('name');
+            $book->publication = $req->input('publication');
+            $book->released_on = $req->input('released_on');
+            $book->page = $req->input('page');
+            $saved = $book->save();
+            if (!$saved) {
+                return view('admin/add_book', ['error'=>'Server Error!!!']);
+            }
+            return redirect()->route('admin-books');
+        } catch(Exception $err) {
+            return view('admin/add_book', ['error'=>'Server Error!!!']);
+        }
+    }
 }

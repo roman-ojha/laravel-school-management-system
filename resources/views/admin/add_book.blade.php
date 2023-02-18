@@ -3,6 +3,7 @@
 @section('css')
     {{-- @vite('resources/css/') --}}
 @endsection
+
 @section('style')
     @parent
     <style>
@@ -28,33 +29,41 @@
             color: red;
         }
 
-        .teachers-button {
+        .books-button {
             border: 2px solid black;
             padding: 5px 10px;
             border-radius: 5px;
             margin-top: 10px;
         }
 
-        .teachers-button a {
+        .books-button a {
             text-decoration: none;
             color: black;
         }
     </style>
 @endsection
 
-@section('title', 'add new teacher')
+@section('title', 'add new book')
 
 @section('main')
-    <h1>Add Teacher</h1>
-    <form action="{{ route('admin-add-teacher') }}" method="POST">
+    <h1>Add new Book</h1>
+    <form action="{{ route('admin-add-book') }}" method="POST">
         @csrf
         <div>
             <label for="name">Name</label>
             <input type="text" id="name" name="name" />
         </div>
         <div>
-            <label for="salary">Salary</label>
-            <input type="number" id="salary" name="salary">
+            <label for="publication">Publication</label>
+            <input type="text" id="publication" name="publication">
+        </div>
+        <div>
+            <label for="page">No. of page</label>
+            <input type="number" id="page" name="page">
+        </div>
+        <div>
+            <label for="released_on">Released On</label>
+            <input type="date" id="released_on" name="released_on">
         </div>
         <div>
             <input type="submit" value="Add">
@@ -65,8 +74,8 @@
         <p class="error">{{ $error }}</p>
     @endif
 
-    <div class="teachers-button">
-        <a href="{{ route('admin-teachers') }}">Show Teachers</a>
+    <div class="books-button">
+        <a href="{{ route('admin-books') }}">Show Books</a>
     </div>
 @endsection
 

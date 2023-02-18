@@ -11,7 +11,7 @@
             <tr>
                 <td>{{ $book['name'] }}</td>
                 <td>{{ $book['publication'] }}</td>
-                <td>{{ $book['release-on'] }}</td>
+                <td>{{ $book['released_on'] }}</td>
                 <td>{{ $book['page'] }}</td>
                 <td>
                     <button class="delete-button" onclick="deleteBook('{{ $book['id'] }}')"

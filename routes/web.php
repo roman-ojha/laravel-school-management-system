@@ -19,4 +19,6 @@ Route::group(['prefix'=>'admin'], function () {
 
     // Books:
     Route::get('/books', [AdminController::class,'books'])->name('admin-books');
+    Route::view('/book', 'admin/add_book')->name('admin-view-add-book');
+    Route::post('/book', [AdminController::class,'add_book'])->name('admin-add-book');
 });

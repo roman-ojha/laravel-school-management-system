@@ -16,7 +16,7 @@ return new class () extends Migration {
             $table->id();
             $table->char("name", 50);
             $table->char("publication", 70);
-            $table->date("release-on");
+            $table->date("released_on");
             $table->integer("page");
             $table->timestamps();
         });

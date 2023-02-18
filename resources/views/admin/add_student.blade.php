@@ -43,7 +43,7 @@
     </style>
 @endsection
 
-@section('title', 'admin')
+@section('title', 'add new student')
 
 @section('main')
     <h1>Add new Student</h1>
