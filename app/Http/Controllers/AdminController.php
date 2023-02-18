@@ -5,8 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Student;
 use Exception;
-// use App\View\Components\StudentsList;
 use App\Models\Teacher;
+use App\Models\Book;
 
 class AdminController extends Controller
 {
@@ -100,6 +100,7 @@ class AdminController extends Controller
 
     public function books()
     {
-        return view('admin.books');
+        $books = Book::all();
+        return view('admin.books', ['books'=>$books]);
     }
 }
