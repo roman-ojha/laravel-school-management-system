@@ -44,7 +44,7 @@
         <a href="{{ route('admin-view-add-student') }}">Add new Faculty</a>
     </div>
     <div id="faculties-list-component">
-        {{-- <x-students-list :students="$students" /> --}}
+        <x-faculties-list :faculties="$faculties" />
     </div>
 @endsection
 
