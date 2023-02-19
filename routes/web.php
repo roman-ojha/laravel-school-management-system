@@ -25,4 +25,6 @@ Route::group(['prefix'=>'admin'], function () {
 
     // Faculties:
     Route::get('/faculties', [AdminController::class,'faculties'])->name('admin-faculties');
+    Route::view('/faculty', 'admin/add_faculty')->name('admin-view-add-faculty');
+    Route::post('/faculty', [AdminController::class,'add_faculty'])->name('admin-add-faculty');
 });

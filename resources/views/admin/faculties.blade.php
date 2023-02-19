@@ -41,7 +41,7 @@
 @section('main')
     <h1>Faculties</h1>
     <div class="add-button">
-        <a href="{{ route('admin-view-add-student') }}">Add new Faculty</a>
+        <a href="{{ route('admin-view-add-faculty') }}">Add new Faculty</a>
     </div>
     <div id="faculties-list-component">
         <x-faculties-list :faculties="$faculties" />

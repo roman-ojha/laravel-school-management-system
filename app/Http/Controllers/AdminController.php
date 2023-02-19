@@ -142,4 +142,18 @@ class AdminController extends Controller
 
         return view('admin/faculties', ['faculties'=>$faculties]);
     }
+
+    public function add_faculty(Request $req)
+    {
+        if (!$req->filled('name')) {
+            return view('admin/add_faculty', ['error'=>"All field is required"]);
+        }
+        $faculty = new Faculty();
+        $faculty->name = $req->input('name');
+        $saved = $faculty->save();
+        if (!$saved) {
+            return view('admin/add_faculty', ['error'=>"Server Error!!!"]);
+        }
+        return redirect()->route('admin-faculties');
+    }
 }
