@@ -18,23 +18,24 @@ class AdminController extends Controller
 
     public function students()
     {
-        $students = Student::select('id', 'name', 'batch', 'roll', 'faculty_id')->with(['faculty'=>function ($q) {
+        $students = Student::select('id', 'name', 'batch', 'roll', 'faculty_id')->with(['faculty' => function ($q) {
             $q->select('id', 'name');
         }])->get();
-        return view('admin/students', ['students'=>$students]);
+        return view('admin/students', ['students' => $students]);
     }
+
     public function add_student_view()
     {
         $faculties = Faculty::select('id', 'name')->get();
-        return view('admin/add_student', ['error'=>'','faculties'=>$faculties]);
+        return view('admin/add_student', ['error' => '', 'faculties' => $faculties]);
     }
 
     public function add_student(Request $req)
     {
         try {
-            if (!$req->filled('name')||!$req->filled('roll')||!$req->filled('batch')||!$req->filled('faculty')) {
+            if (!$req->filled('name') || !$req->filled('roll') || !$req->filled('batch') || !$req->filled('faculty')) {
                 $faculties = Faculty::select('id', 'name')->get();
-                return view('admin/add_student', ['error'=>'All field is required','faculties'=>$faculties]);
+                return view('admin/add_student', ['error' => 'All field is required', 'faculties' => $faculties]);
             }
             $name = $req->input('name');
             $roll = $req->input('roll');
@@ -48,12 +49,12 @@ class AdminController extends Controller
             $saved = $student->save();
             if (!$saved) {
                 $faculties = Faculty::select('id', 'name')->get();
-                return view('admin/add_student', ['error'=>'Server Error!!!','faculties'=>$faculties]);
+                return view('admin/add_student', ['error' => 'Server Error!!!', 'faculties' => $faculties]);
             }
             return redirect()->route('admin-students');
-        } catch(Exception $err) {
+        } catch (Exception $err) {
             // error_log($err);
-            return view('admin/add_student', ['error'=>'Server Error!!!']);
+            return view('admin/add_student', ['error' => 'Server Error!!!']);
         }
     }
 
@@ -66,31 +67,31 @@ class AdminController extends Controller
 
         // $studentsListComp = new StudentsList($newStudents);
         // return $studentsListComp->render();
-        return view('components.students-list', ['students'=>$newStudents]);
+        return view('components.students-list', ['students' => $newStudents]);
     }
 
     public function teachers()
     {
         $teachers = Teacher::all();
-        return view('admin.teachers', ['teachers'=>$teachers]);
+        return view('admin.teachers', ['teachers' => $teachers]);
     }
 
     public function add_teacher(Request $req)
     {
         try {
-            if (!$req->filled('name')||!$req->filled('salary')) {
-                return view('admin/add_teacher', ['error'=>"All field is required"]);
+            if (!$req->filled('name') || !$req->filled('salary')) {
+                return view('admin/add_teacher', ['error' => "All field is required"]);
             }
             $teacher = new Teacher();
             $teacher->name = $req->input('name');
             $teacher->salary = $req->input('salary');
             $saved = $teacher->save();
             if (!$saved) {
-                return view('admin/add_teacher', ['error'=>'Server Error!!!']);
+                return view('admin/add_teacher', ['error' => 'Server Error!!!']);
             }
             return redirect()->route('admin-teachers');
-        } catch(Exception $err) {
-            return view('admin/add_teacher', ['error'=>'Server Error!!!']);
+        } catch (Exception $err) {
+            return view('admin/add_teacher', ['error' => 'Server Error!!!']);
         }
     }
 
@@ -101,22 +102,22 @@ class AdminController extends Controller
 
             $new_teachers = Teacher::all();
 
-            return view('components.teachers-list', ['teachers'=>$new_teachers]);
-        } catch(Exception $err) {
+            return view('components.teachers-list', ['teachers' => $new_teachers]);
+        } catch (Exception $err) {
         }
     }
 
     public function books()
     {
         $books = Book::all();
-        return view('admin.books', ['books'=>$books]);
+        return view('admin.books', ['books' => $books]);
     }
 
     public function add_book(Request $req)
     {
         try {
-            if (!$req->filled('name')||!$req->filled('publication')||!$req->filled('released_on')||!$req->filled('page')) {
-                return view('admin/add_book', ['error'=>"All Field is required"]);
+            if (!$req->filled('name') || !$req->filled('publication') || !$req->filled('released_on') || !$req->filled('page')) {
+                return view('admin/add_book', ['error' => "All Field is required"]);
             }
             $book = new Book();
             $book->name = $req->input('name');
@@ -125,11 +126,11 @@ class AdminController extends Controller
             $book->page = $req->input('page');
             $saved = $book->save();
             if (!$saved) {
-                return view('admin/add_book', ['error'=>'Server Error!!!']);
+                return view('admin/add_book', ['error' => 'Server Error!!!']);
             }
             return redirect()->route('admin-books');
-        } catch(Exception $err) {
-            return view('admin/add_book', ['error'=>'Server Error!!!']);
+        } catch (Exception $err) {
+            return view('admin/add_book', ['error' => 'Server Error!!!']);
         }
     }
 
@@ -138,8 +139,8 @@ class AdminController extends Controller
         try {
             Book::find($id)->delete();
             $books = Book::all();
-            return view('components.books-list', ['books'=>$books]);
-        } catch(Exception $err) {
+            return view('components.books-list', ['books' => $books]);
+        } catch (Exception $err) {
         }
     }
 
@@ -147,19 +148,19 @@ class AdminController extends Controller
     {
         $faculties = Faculty::all();
 
-        return view('admin/faculties', ['faculties'=>$faculties]);
+        return view('admin/faculties', ['faculties' => $faculties]);
     }
 
     public function add_faculty(Request $req)
     {
         if (!$req->filled('name')) {
-            return view('admin/add_faculty', ['error'=>"All field is required"]);
+            return view('admin/add_faculty', ['error' => "All field is required"]);
         }
         $faculty = new Faculty();
         $faculty->name = $req->input('name');
         $saved = $faculty->save();
         if (!$saved) {
-            return view('admin/add_faculty', ['error'=>"Server Error!!!"]);
+            return view('admin/add_faculty', ['error' => "Server Error!!!"]);
         }
         return redirect()->route('admin-faculties');
     }
@@ -168,6 +169,6 @@ class AdminController extends Controller
     {
         Faculty::find($id)->delete();
         $faculties = Faculty::all();
-        return view('components.faculties-list', ['faculties'=>$faculties]);
+        return view('components.faculties-list', ['faculties' => $faculties]);
     }
 }
