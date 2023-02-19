@@ -7,6 +7,7 @@ use App\Models\Student;
 use Exception;
 use App\Models\Teacher;
 use App\Models\Book;
+use App\Models\Faculty;
 
 class AdminController extends Controller
 {
@@ -133,5 +134,12 @@ class AdminController extends Controller
             return view('components.books-list', ['books'=>$books]);
         } catch(Exception $err) {
         }
+    }
+
+    public function faculties()
+    {
+        $faculties = Faculty::all();
+
+        return view('admin/faculties', ['faculties'=>$faculties]);
     }
 }

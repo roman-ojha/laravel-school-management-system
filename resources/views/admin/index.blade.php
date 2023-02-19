@@ -12,6 +12,7 @@
     <a href="{{ route('admin-students') }}">Students</a>
     <a href="{{ route('admin-teachers') }}">Teachers</a>
     <a href="{{ route('admin-books') }}">Books</a>
+    <a href="{{ route('admin-faculties') }}">Faculties</a>
 @endsection
 
 @section('script')

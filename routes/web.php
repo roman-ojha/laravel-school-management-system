@@ -22,4 +22,7 @@ Route::group(['prefix'=>'admin'], function () {
     Route::view('/book', 'admin/add_book')->name('admin-view-add-book');
     Route::post('/book', [AdminController::class,'add_book'])->name('admin-add-book');
     Route::delete('/book/{id}', [AdminController::class,'delete_book'])->name('admin-delete-book');
+
+    // Faculties:
+    Route::get('/faculties', [AdminController::class,'faculties'])->name('admin-faculties');
 });
