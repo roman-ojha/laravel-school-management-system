@@ -156,4 +156,11 @@ class AdminController extends Controller
         }
         return redirect()->route('admin-faculties');
     }
+
+    public function delete_faculty(Request $req, $id)
+    {
+        Faculty::find($id)->delete();
+        $faculties = Faculty::all();
+        return view('components.faculties-list', ['faculties'=>$faculties]);
+    }
 }

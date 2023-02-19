@@ -49,5 +49,20 @@
 @endsection
 
 @section('script')
-    {{-- @vite('resources/js/') --}}
+    <script>
+        async function deleteFaculty(id) {
+            try {
+                const res = await fetch(`/admin/faculty/${id}`, {
+                    method: "DELETE",
+                    headers: {
+                        "X-CSRF-Token": "{{ csrf_token() }}"
+                    },
+                });
+                const resHtml = await res.text();
+                document.getElementById('faculties-list-component').innerHTML = resHtml;
+            } catch (err) {
+
+            }
+        }
+    </script>
 @endsection
