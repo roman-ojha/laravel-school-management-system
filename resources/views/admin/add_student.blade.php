@@ -62,6 +62,15 @@
             <input type="date" id="batch" name="batch">
         </div>
         <div>
+            <label for="faculty">Faculty</label>
+            <select name="faculty" id="faculty">
+                <option value="">Select Faculty</option>
+                @foreach ($faculties as $faculty)
+                    <option value="{{ $faculty['id'] }}">{{ $faculty['name'] }}</option>
+                @endforeach
+            </select>
+        </div>
+        <div>
             <input type="submit" value="Add">
         </div>
     </form>

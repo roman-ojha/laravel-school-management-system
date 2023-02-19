@@ -7,7 +7,7 @@ Route::group(['prefix'=>'admin'], function () {
     // Student:
     Route::get('/', [AdminController::class,'index'])->name('admin');
     Route::get('/students', [AdminController::class,'students'])->name('admin-students');
-    Route::view('/student', 'admin/add_student', ['error'=>''])->name('admin-view-add-student');
+    Route::get('/student', [AdminController::class,'add_student_view'])->name('admin-view-add-student');
     Route::post('/student', [AdminController::class,'add_student'])->name('admin-add-student');
     Route::get('/student/{id}', [AdminController::class,'delete_student'])->name('admin-delete-student');
 

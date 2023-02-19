@@ -18,16 +18,23 @@ class AdminController extends Controller
 
     public function students()
     {
-        // $students = Student::all();
-        $students = Student::all();
+        $students = Student::select('id', 'name', 'batch', 'roll', 'faculty_id')->with(['faculty'=>function ($q) {
+            $q->select('id', 'name');
+        }])->get();
         return view('admin/students', ['students'=>$students]);
+    }
+    public function add_student_view()
+    {
+        $faculties = Faculty::select('id', 'name')->get();
+        return view('admin/add_student', ['error'=>'','faculties'=>$faculties]);
     }
 
     public function add_student(Request $req)
     {
         try {
-            if (!$req->filled('name')||!$req->filled('roll')||!$req->filled('batch')) {
-                return view('admin/add_student', ['error'=>'All field is required']);
+            if (!$req->filled('name')||!$req->filled('roll')||!$req->filled('batch')||!$req->filled('faculty')) {
+                $faculties = Faculty::select('id', 'name')->get();
+                return view('admin/add_student', ['error'=>'All field is required','faculties'=>$faculties]);
             }
             $name = $req->input('name');
             $roll = $req->input('roll');
@@ -37,11 +44,11 @@ class AdminController extends Controller
             $student->name = $name;
             $student->roll = $roll;
             $student->batch = $batch;
-            // Todo...
-            $student->faculty_id = 1;
+            $student->faculty_id = $req->input('faculty');
             $saved = $student->save();
             if (!$saved) {
-                return view('admin/add_student', ['error'=>'Server Error!!!']);
+                $faculties = Faculty::select('id', 'name')->get();
+                return view('admin/add_student', ['error'=>'Server Error!!!','faculties'=>$faculties]);
             }
             return redirect()->route('admin-students');
         } catch(Exception $err) {
