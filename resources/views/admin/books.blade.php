@@ -48,5 +48,22 @@
 @endsection
 
 @section('script')
-    {{-- @vite('resources/js/') --}}
+    <script>
+        async function deleteBook(id) {
+            try {
+
+                const res = await fetch(`/admin/book/${id}`, {
+                    method: "DELETE",
+                    headers: {
+                        "X-CSRF-Token": "{{ csrf_token() }}"
+                    }
+                });
+
+                const resHtml = await res.text();
+                document.getElementById('books-list-component').innerHTML = resHtml;
+            } catch (err) {
+
+            }
+        }
+    </script>
 @endsection

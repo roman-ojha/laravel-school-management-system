@@ -124,4 +124,14 @@ class AdminController extends Controller
             return view('admin/add_book', ['error'=>'Server Error!!!']);
         }
     }
+
+    public function delete_book(Request $req, $id)
+    {
+        try {
+            Book::find($id)->delete();
+            $books = Book::all();
+            return view('components.books-list', ['books'=>$books]);
+        } catch(Exception $err) {
+        }
+    }
 }
