@@ -40,7 +40,7 @@
 @section('main')
     <h1>Book Self</h1>
     <div class="add-button">
-        <a href="{{ route('admin-view-add-teacher') }}">Add new teacher</a>
+        <a href="{{ route('admin-add-book-into-book-self') }}">Add Book into Bookself</a>
     </div>
     <div id="book-self-list-component">
         <x-book-self-book-list :bookSelf="$book_self" />

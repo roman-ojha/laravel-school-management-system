@@ -37,5 +37,6 @@ Route::group(['prefix' => 'admin'], function () {
     Route::delete('/subject/{id}', [AdminController::class, 'delete_subject'])->name('admin-delete-subject');
 
     // Library:
-    Route::get('/book_self', [AdminController::class, 'book_self'])->name('admin-library-book_self');
+    Route::get('/book-self', [AdminController::class, 'book_self'])->name('admin-library-book_self');
+    Route::view('/add-book-into-book-self', 'admin/add_book_self')->name('admin-add-book-into-book-self');
 });

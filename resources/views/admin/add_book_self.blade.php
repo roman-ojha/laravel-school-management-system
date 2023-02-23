@@ -29,64 +29,61 @@
             color: red;
         }
 
-        .students-button {
+        .books-button {
             border: 2px solid black;
             padding: 5px 10px;
             border-radius: 5px;
             margin-top: 10px;
         }
 
-        .students-button a {
+        .books-button a {
             text-decoration: none;
             color: black;
         }
     </style>
 @endsection
 
-@section('title', 'add new student')
+@section('title', 'add new book')
 
 @section('main')
-    <h1>Add new Student</h1>
-    <form action="{{ route('admin-add-student') }}" method="POST">
+    <h1>Add new Book Into BookSelf</h1>
+    <form action="{{ route('admin-add-book') }}" method="POST">
         @csrf
         <div>
-            <label for="name">Name</label>
-            <input type="text" id="name" name="name" />
+            <label for="book">Book</label>
+            <select name="book" id="book"></select>
         </div>
         <div>
-            <label for="roll">Roll</label>
-            <input type="number" id="roll" name="roll">
-        </div>
-        <div>
-            <label for="batch">Batch</label>
-            <input type="date" id="batch" name="batch">
-        </div>
-        <div>
-            <label for="faculty">Faculty</label>
-            <select name="faculty" id="faculty">
-                <option value="" disabled>Select Faculty</option>
-                @foreach ($faculties as $faculty)
-                    <option value="{{ $faculty['id'] }}">{{ $faculty['name'] }}</option>
-                @endforeach
-            </select>
+            <label for="quantity">Quantity</label>
+            <input type="number" id="quantity" name="quantity">
         </div>
         <div>
             <input type="submit" value="Add">
         </div>
     </form>
 
-    {{-- @if ($error)
-        <h1>Error</h1>
-    @endif --}}
     @if (!empty($error))
         <p class="error">{{ $error }}</p>
     @endif
 
-    <div class="students-button">
-        <a href="{{ route('admin-students') }}">Show Students</a>
+    <div class="books-button">
+        <a href="{{ route('admin-books') }}">Show Books</a>
     </div>
 @endsection
 
 @section('script')
     {{-- @vite('resources/js/') --}}
+    <script type="text/javascript">
+        (async function() {
+            const booksRes = await fetch('/api/admin/books');
+            const books = await booksRes.json();
+            let booksOption = "<option value='' disabled> Select Book </option>";
+            books.forEach((value) => {
+                booksOption += `
+                <option value="${value.id}"> ${value.name} </option>
+                `;
+            });
+            document.getElementById('book').innerHTML = booksOption;
+        })();
+    </script>
 @endsection

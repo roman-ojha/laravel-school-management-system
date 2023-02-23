@@ -234,4 +234,10 @@ class AdminController extends Controller
         $book_self = Library::all();
         return view('admin/book-self', ['book_self' => $book_self]);
     }
+
+    public function get_books_api()
+    {
+        $books = Book::select(['id', 'name'])->get();
+        return $books;
+    }
 }
