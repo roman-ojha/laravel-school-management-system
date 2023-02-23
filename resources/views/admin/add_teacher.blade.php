@@ -59,7 +59,11 @@
         <div>
             <label for="teaches">Teaches</label>
             <select name="teaches[]" id="teaches" multiple>
-                <option value="null">Teacher Teaches</option>
+            </select>
+        </div>
+        <div>
+            <label for="faculties">Faculties</label>
+            <select name="faculties[]" id="faculties" multiple>
             </select>
         </div>
         <div>
@@ -80,15 +84,23 @@
     {{-- @vite('resources/js/') --}}
     <script type="text/javascript">
         (async function() {
-            const subjectsRes = await fetch("/api/admin/subjects");
-            const subjects = await subjectsRes.json();
+            const res = await fetch("/api/admin/subjects-and-faculties");
+            const data = await res.json();
+            console.log(data);
             var teachesOptions = "";
-            subjects.forEach((value, index) => {
+            var facultiesOptions = "";
+            data.subjects.forEach((value, index) => {
                 teachesOptions += `
-            <option value="${value.id}"> ${value.name} </option>
-            `;
+                <option value="${value.id}"> ${value.name} </option>
+                `;
+            });
+            data.faculties.forEach((value, index) => {
+                facultiesOptions += `
+                <option value="${value.id}"> ${value.name} </option>
+                `;
             });
             document.getElementById('teaches').innerHTML = teachesOptions;
+            document.getElementById('faculties').innerHTML = facultiesOptions;
         })();
     </script>
 @endsection

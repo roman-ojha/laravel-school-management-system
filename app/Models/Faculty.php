@@ -10,4 +10,9 @@ class Faculty extends Model
     use HasFactory;
 
     public $table = 'faculties';
+
+    public function teachers()
+    {
+        return $this->belongsToMany(Teacher::class, 'teachers_faculties');
+    }
 }

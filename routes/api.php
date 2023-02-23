@@ -20,5 +20,5 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 Route::group(['prefix' => 'admin'], function () {
-    Route::get('/subjects', [AdminController::class, 'get_subject_api']);
+    Route::get('/subjects-and-faculties', [AdminController::class, 'get_subjects_and_faculties_api']);
 });

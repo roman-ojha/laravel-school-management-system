@@ -3,6 +3,7 @@
         <th>Name</th>
         <th>Salary</th>
         <th>Teaches</th>
+        <th>Faculties</th>
         <th>Delete</th>
     </tr>
     @foreach ($teachers as $teacher)
@@ -12,6 +13,11 @@
             <td>
                 @foreach ($teacher['teaches'] as $teaches)
                     {{ $teaches['name'] }}<br />
+                @endforeach
+            </td>
+            <td>
+                @foreach ($teacher['faculties'] as $faculty)
+                    {{ $faculty['name'] }}<br />
                 @endforeach
             </td>
             <td>
