@@ -10,4 +10,10 @@ class Library extends Model
     use HasFactory;
 
     public $table = 'library';
+
+
+    public function book()
+    {
+        return $this->belongsTo(Book::class);
+    }
 }

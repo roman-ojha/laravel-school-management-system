@@ -8,7 +8,7 @@
         </tr>
         @foreach ($book_self as $book)
             <tr>
-                <td>{{ $book['book_id'] }}</td>
+                <td>{{ $book['book']['name'] }}</td>
                 <td>{{ $book['quantity'] }}</td>
                 <td>{{ $book['remaining'] }}</td>
                 <td>

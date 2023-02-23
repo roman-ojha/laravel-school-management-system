@@ -84,6 +84,10 @@
                 `;
             });
             document.getElementById('book').innerHTML = booksOption;
+            if (books.length == 0) {
+                document.body.innerHTML =
+                    "<h1> All the books are added into the library, Please first add new books only after that you can add it into the library </h1>"
+            }
         })();
     </script>
 @endsection

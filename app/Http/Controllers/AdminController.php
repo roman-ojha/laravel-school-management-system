@@ -231,13 +231,17 @@ class AdminController extends Controller
 
     public function book_self()
     {
-        $book_self = Library::all();
+        $book_self = Library::select(['id', 'quantity', 'remaining', 'book_id'])->with(['book' => function ($q) {
+            $q->select('id', 'name');
+        }])->get();
         return view('admin/book-self', ['book_self' => $book_self]);
     }
 
     public function get_books_for_book_self_api()
     {
-        $books = Book::select(['id', 'name'])->get();
+        $books = Book::select(['id', 'name'])->with(['library' => function ($q) {
+            $q->select('id', 'book_id');
+        }])->whereDoesntHave('library')->get();
         return $books;
     }
 
