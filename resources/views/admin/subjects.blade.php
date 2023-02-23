@@ -43,7 +43,7 @@
         <a href="{{ route('admin-view-add-student') }}">Add new Student</a>
     </div>
     <div id="subject-list-component">
-        {{-- <x-students-list :students="$students" /> --}}
+        <x-subjects-list :subjects="$subjects" />
     </div>
     @include('layout.navigate-to-admin')
 @endsection
