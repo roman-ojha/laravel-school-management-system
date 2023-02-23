@@ -19,7 +19,7 @@ class AdminController extends Controller
 
     public function students()
     {
-        $students = Student::select('id', 'name', 'batch', 'roll', 'faculty_id')->with(['faculty' => function ($q) {
+        $students = Student::select(['id', 'name', 'batch', 'roll', 'faculty_id'])->with(['faculty' => function ($q) {
             $q->select('id', 'name');
         }])->get();
         return view('admin/students', ['students' => $students]);
@@ -27,7 +27,7 @@ class AdminController extends Controller
 
     public function add_student_view()
     {
-        $faculties = Faculty::select('id', 'name')->get();
+        $faculties = Faculty::select(['id', 'name'])->get();
         return view('admin/add_student', ['error' => '', 'faculties' => $faculties]);
     }
 
@@ -35,7 +35,7 @@ class AdminController extends Controller
     {
         try {
             if (!$req->filled('name') || !$req->filled('roll') || !$req->filled('batch') || !$req->filled('faculty')) {
-                $faculties = Faculty::select('id', 'name')->get();
+                $faculties = Faculty::select(['id', 'name'])->get();
                 return view('admin/add_student', ['error' => 'All field is required', 'faculties' => $faculties]);
             }
             $name = $req->input('name');
@@ -49,7 +49,7 @@ class AdminController extends Controller
             $student->faculty_id = $req->input('faculty');
             $saved = $student->save();
             if (!$saved) {
-                $faculties = Faculty::select('id', 'name')->get();
+                $faculties = Faculty::select(['id', 'name'])->get();
                 return view('admin/add_student', ['error' => 'Server Error!!!', 'faculties' => $faculties]);
             }
             return redirect()->route('admin-students');
@@ -73,7 +73,7 @@ class AdminController extends Controller
 
     public function teachers()
     {
-        $teachers = Teacher::select('id', 'name', 'salary',)->with(['teaches' => function ($q) {
+        $teachers = Teacher::select(['id', 'name', 'salary',])->with(['teaches' => function ($q) {
             $q->select('name');
         }, 'faculties' => function ($q) {
             $q->select('name');
@@ -193,8 +193,8 @@ class AdminController extends Controller
 
     public function get_subjects_and_faculties_api()
     {
-        $subjects = Subject::select("id", "name")->get();
-        $faculties = Faculty::select("id", "name")->get();
+        $subjects = Subject::select(["id", "name"])->get();
+        $faculties = Faculty::select(["id", "name"])->get();
         return ['subjects' => $subjects, 'faculties' => $faculties];
     }
 
