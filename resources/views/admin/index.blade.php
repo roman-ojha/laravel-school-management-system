@@ -14,6 +14,7 @@
     <a class="admin-anchor" href="{{ route('admin-books') }}">Books</a>
     <a class="admin-anchor" href="{{ route('admin-faculties') }}">Faculties</a>
     <a class="admin-anchor" href="{{ route('admin-subjects') }}">Subjects</a>
+    <a class="admin-anchor" href="{{ route('admin-library-book_self') }}">Library</a>
 @endsection
 
 @section('script')

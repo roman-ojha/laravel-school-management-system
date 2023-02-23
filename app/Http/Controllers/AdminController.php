@@ -8,6 +8,7 @@ use Exception;
 use App\Models\Teacher;
 use App\Models\Book;
 use App\Models\Faculty;
+use App\Models\Library;
 use App\Models\Subject;
 
 class AdminController extends Controller
@@ -225,5 +226,12 @@ class AdminController extends Controller
             return view('components/subjects-list', ['subjects' => $new_subject]);
         } catch (Exception $err) {
         }
+    }
+
+
+    public function book_self()
+    {
+        $book_self = Library::all();
+        return view('admin/book-self', ['book_self' => $book_self]);
     }
 }
