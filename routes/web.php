@@ -34,4 +34,5 @@ Route::group(['prefix' => 'admin'], function () {
     Route::get('/subjects', [AdminController::class, 'subjects'])->name('admin-subjects');
     Route::view('/subject', 'admin/add_subject')->name('admin-view-add-subject');
     Route::post('/subject', [AdminController::class, 'add_subject'])->name('admin-add-subject');
+    Route::delete('/subject/{id}', [AdminController::class, 'delete_subject'])->name('admin-delete-subject');
 });

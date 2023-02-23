@@ -42,7 +42,7 @@
     <div class="add-button">
         <a href="{{ route('admin-view-add-subject') }}">Add new Subject</a>
     </div>
-    <div id="subject-list-component">
+    <div id="subjects-list-component">
         <x-subjects-list :subjects="$subjects" />
     </div>
     @include('layout.navigate-to-admin')
@@ -50,17 +50,19 @@
 
 @section('script')
     <script type="text/javascript">
-        async function deleteStudent(id) {
-            // delete according to given id
-            const res = await fetch(`/admin/student/${id}`, {
-                method: "GET",
-            });
+        async function deleteSubject(id) {
+            try {
+                const res = await fetch(`/admin/subject/${id}`, {
+                    method: "DELETE",
+                    headers: {
+                        "X-CSRF-Token": "{{ csrf_token() }}"
+                    }
+                });
+                const resHtml = await res.text();
+                document.getElementById('subjects-list-component').innerHTML = resHtml;
+            } catch (err) {
 
-            const resHtml = await res.text();
-            const studentsListComponent = document.getElementById(
-                "students-list-component"
-            );
-            studentsListComponent.innerHTML = resHtml;
+            }
         }
     </script>
 @endsection

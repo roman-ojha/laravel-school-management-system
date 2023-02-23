@@ -196,4 +196,14 @@ class AdminController extends Controller
         } catch (Exception $err) {
         }
     }
+
+    public function delete_subject(Request $req, $id)
+    {
+        try {
+            Subject::find($id)->delete();
+            $new_subject = Subject::all();
+            return view('components/subjects-list', ['subjects' => $new_subject]);
+        } catch (Exception $err) {
+        }
+    }
 }
