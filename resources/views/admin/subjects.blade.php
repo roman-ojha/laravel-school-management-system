@@ -40,7 +40,7 @@
 @section('main')
     <h1>Subjects</h1>
     <div class="add-button">
-        <a href="{{ route('admin-view-add-student') }}">Add new Student</a>
+        <a href="{{ route('admin-view-add-subject') }}">Add new Subject</a>
     </div>
     <div id="subject-list-component">
         <x-subjects-list :subjects="$subjects" />

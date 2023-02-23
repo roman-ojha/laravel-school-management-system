@@ -179,4 +179,21 @@ class AdminController extends Controller
 
         return view('admin.subjects', ["subjects" => $subjects]);
     }
+
+    public function add_subject(Request $req)
+    {
+        try {
+            if (!$req->filled('name')) {
+                return view('admin/add_subject', ['error' => "All field is required"]);
+            }
+            $subject = new Subject();
+            $subject->name = $req->input('name');
+            $saved = $subject->save();
+            if (!$saved) {
+                return view('admin/add_subject', ['error' => "Server Error!!!"]);
+            }
+            return redirect()->route('admin-subjects');
+        } catch (Exception $err) {
+        }
+    }
 }

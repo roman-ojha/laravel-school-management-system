@@ -32,4 +32,6 @@ Route::group(['prefix' => 'admin'], function () {
 
     // Subjects:
     Route::get('/subjects', [AdminController::class, 'subjects'])->name('admin-subjects');
+    Route::view('/subject', 'admin/add_subject')->name('admin-view-add-subject');
+    Route::post('/subject', [AdminController::class, 'add_subject'])->name('admin-add-subject');
 });
