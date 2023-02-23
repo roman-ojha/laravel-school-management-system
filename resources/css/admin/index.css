@@ -1,4 +1,12 @@
-body {
-    display: grid;
-    place-items: center;
+#navigate-to-admin-container {
+    margin: 30px;
+    border: 2px solid rgb(136, 136, 136);
+    border-radius: 5px;
+    padding: 5px 10px;
+    cursor: pointer;
+}
+
+#navigate-to-admin-container a {
+    color: white;
+    text-decoration: none;
 }

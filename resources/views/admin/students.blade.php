@@ -2,6 +2,7 @@
 
 @section('css')
     @vite('resources/css/admin/students.css')
+    @vite('resources/css/admin/index.css')
 @endsection
 
 @section('style')
@@ -45,7 +46,7 @@
     <div id="students-list-component">
         <x-students-list :students="$students" />
     </div>
-
+    @include('layout.navigate-to-admin')
 @endsection
 
 @section('script')

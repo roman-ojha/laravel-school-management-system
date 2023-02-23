@@ -1,7 +1,7 @@
 @extends('layout.global')
 
 @section('css')
-    {{-- @vite('resources/css/') --}}
+    @vite('resources/css/admin/index.css')
 @endsection
 
 @section('style')
@@ -45,6 +45,7 @@
     <div id="books-list-component">
         <x-books-list :books="$books" />
     </div>
+    @include('layout.navigate-to-admin')
 @endsection
 
 @section('script')
