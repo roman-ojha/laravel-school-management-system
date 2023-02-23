@@ -8,6 +8,7 @@ use Exception;
 use App\Models\Teacher;
 use App\Models\Book;
 use App\Models\Faculty;
+use App\Models\Subject;
 
 class AdminController extends Controller
 {
@@ -170,5 +171,12 @@ class AdminController extends Controller
         Faculty::find($id)->delete();
         $faculties = Faculty::all();
         return view('components.faculties-list', ['faculties' => $faculties]);
+    }
+
+    public function subjects()
+    {
+        $subjects = Subject::all();
+
+        return view('admin.subjects', ["subjects" => $subjects]);
     }
 }
