@@ -9,11 +9,11 @@
 @section('main')
     <h1>Admin</h1>
 
-    <a href="{{ route('admin-students') }}">Students</a>
-    <a href="{{ route('admin-teachers') }}">Teachers</a>
-    <a href="{{ route('admin-books') }}">Books</a>
-    <a href="{{ route('admin-faculties') }}">Faculties</a>
-    <a href="{{ route('admin-subjects') }}">Subjects</a>
+    <a class="admin-anchor" href="{{ route('admin-students') }}">Students</a>
+    <a class="admin-anchor" href="{{ route('admin-teachers') }}">Teachers</a>
+    <a class="admin-anchor" href="{{ route('admin-books') }}">Books</a>
+    <a class="admin-anchor" href="{{ route('admin-faculties') }}">Faculties</a>
+    <a class="admin-anchor" href="{{ route('admin-subjects') }}">Subjects</a>
 @endsection
 
 @section('script')

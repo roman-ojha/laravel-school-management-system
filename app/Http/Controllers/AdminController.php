@@ -73,7 +73,9 @@ class AdminController extends Controller
 
     public function teachers()
     {
-        $teachers = Teacher::all();
+        $teachers = Teacher::select('id', 'name', 'salary',)->with(['teaches' => function ($q) {
+            $q->select('name');
+        }])->get();
         return view('admin.teachers', ['teachers' => $teachers]);
     }
 
@@ -87,6 +89,7 @@ class AdminController extends Controller
             $teacher->name = $req->input('name');
             $teacher->salary = $req->input('salary');
             $saved = $teacher->save();
+            $teacher->teaches()->attach($req->input('teaches'));
             if (!$saved) {
                 return view('admin/add_teacher', ['error' => 'Server Error!!!']);
             }
@@ -99,7 +102,9 @@ class AdminController extends Controller
     public function delete_teacher(Request $req, $id)
     {
         try {
-            Teacher::find($id)->delete();
+            $teacher = Teacher::find($id);
+            $teacher->teaches()->detach();
+            $teacher->delete();
 
             $new_teachers = Teacher::all();
 
@@ -180,6 +185,12 @@ class AdminController extends Controller
         return view('admin.subjects', ["subjects" => $subjects]);
     }
 
+    public function get_subject_api()
+    {
+        $subjects = Subject::select("id", "name")->get();
+        return $subjects;
+    }
+
     public function add_subject(Request $req)
     {
         try {
@@ -200,7 +211,9 @@ class AdminController extends Controller
     public function delete_subject(Request $req, $id)
     {
         try {
-            Subject::find($id)->delete();
+            $subject = Subject::find($id);
+            $subject->teachers()->detach();
+            $subject->delete();
             $new_subject = Subject::all();
             return view('components/subjects-list', ['subjects' => $new_subject]);
         } catch (Exception $err) {

@@ -57,6 +57,12 @@
             <input type="number" id="salary" name="salary">
         </div>
         <div>
+            <label for="teaches">Teaches</label>
+            <select name="teaches[]" id="teaches" multiple>
+                <option value="null">Teacher Teaches</option>
+            </select>
+        </div>
+        <div>
             <input type="submit" value="Add">
         </div>
     </form>
@@ -72,4 +78,17 @@
 
 @section('script')
     {{-- @vite('resources/js/') --}}
+    <script type="text/javascript">
+        (async function() {
+            const subjectsRes = await fetch("/api/admin/subjects");
+            const subjects = await subjectsRes.json();
+            var teachesOptions = "";
+            subjects.forEach((value, index) => {
+                teachesOptions += `
+            <option value="${value.id}"> ${value.name} </option>
+            `;
+            });
+            document.getElementById('teaches').innerHTML = teachesOptions;
+        })();
+    </script>
 @endsection
