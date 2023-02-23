@@ -47,7 +47,7 @@
 
 @section('main')
     <h1>Add new Book Into BookSelf</h1>
-    <form action="{{ route('admin-add-book') }}" method="POST">
+    <form action="{{ route('admin-add-book-int-book-self') }}" method="POST">
         @csrf
         <div>
             <label for="book">Book</label>
@@ -75,7 +75,7 @@
     {{-- @vite('resources/js/') --}}
     <script type="text/javascript">
         (async function() {
-            const booksRes = await fetch('/api/admin/books');
+            const booksRes = await fetch('/api/admin/books-for-book-self');
             const books = await booksRes.json();
             let booksOption = "<option value='' disabled> Select Book </option>";
             books.forEach((value) => {

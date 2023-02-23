@@ -235,9 +235,28 @@ class AdminController extends Controller
         return view('admin/book-self', ['book_self' => $book_self]);
     }
 
-    public function get_books_api()
+    public function get_books_for_book_self_api()
     {
         $books = Book::select(['id', 'name'])->get();
         return $books;
+    }
+
+    public function add_book_into_book_self(Request $req)
+    {
+        try {
+            if (!$req->filled('book') || !$req->filled('quantity')) {
+                return view('admin/add_book_self', ['error' => "All field is required"]);
+            }
+            $library = new Library();
+            $library->book_id = $req->input('book');
+            $library->quantity = $req->input('quantity');
+            $library->remaining = $req->input('quantity');
+            $saved = $library->save();
+            if (!$saved) {
+                return view('admin/add_book_self', ['error' => "Server Error!!!"]);
+            }
+            return redirect()->route('admin-library-book_self');
+        } catch (Exception $err) {
+        }
     }
 }

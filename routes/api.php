@@ -21,5 +21,5 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 Route::group(['prefix' => 'admin'], function () {
     Route::get('/subjects-and-faculties', [AdminController::class, 'get_subjects_and_faculties_api']);
-    Route::get('/books', [AdminController::class, 'get_books_api']);
+    Route::get('/books-for-book-self', [AdminController::class, 'get_books_for_book_self_api']);
 });
