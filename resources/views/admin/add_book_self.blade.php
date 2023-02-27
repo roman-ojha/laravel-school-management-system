@@ -67,7 +67,7 @@
     @endif
 
     <div class="books-button">
-        <a href="{{ route('admin-books') }}">Show Books</a>
+        <a href="{{ route('admin-library-book_self') }}">Show BookSelf</a>
     </div>
 @endsection
 
@@ -75,7 +75,7 @@
     {{-- @vite('resources/js/') --}}
     <script type="text/javascript">
         (async function() {
-            const booksRes = await fetch('/api/admin/books-for-book-self');
+            const booksRes = await fetch('/api/admin/library/books-for-book-self');
             const books = await booksRes.json();
             let booksOption = "<option value='' disabled> Select Book </option>";
             books.forEach((value) => {

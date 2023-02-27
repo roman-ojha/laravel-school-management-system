@@ -35,7 +35,7 @@
     </style>
 @endsection
 
-@section('title', 'teachers')
+@section('title', 'book-self')
 
 @section('main')
     <h1>Book Self</h1>
