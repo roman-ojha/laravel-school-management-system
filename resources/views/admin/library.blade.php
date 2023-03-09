@@ -1,23 +1,28 @@
 @extends('layout.global')
 
 @section('css')
-    {{-- @vite('resources/css/') --}}
+    @vite('resources/css/admin/index.css')
 @endsection
 
 @section('style')
-
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+    </style>
 @endsection
 
 @section('title', 'library')
 
 @section('main')
     <h1>Library</h1>
-    <a class="admin-anchor" href="{{ route('admin-students') }}">Students</a>
-    <a class="admin-anchor" href="{{ route('admin-teachers') }}">Teachers</a>
-    <a class="admin-anchor" href="{{ route('admin-books') }}">Books</a>
-    <a class="admin-anchor" href="{{ route('admin-faculties') }}">Faculties</a>
-    <a class="admin-anchor" href="{{ route('admin-subjects') }}">Subjects</a>
-    <a class="admin-anchor" href="{{ route('admin-library-book_self') }}">Library</a>
+    <a class="admin-anchor" href="{{ route('book-self') }}">Bookself</a>
+    <a class="admin-anchor" href="">Students records</a>
+    <a class="admin-anchor" href="">Teachers records</a>
+    @include('layout.navigate-to-admin')
 @endsection
 
 @section('script')
