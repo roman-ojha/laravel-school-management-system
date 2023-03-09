@@ -23,4 +23,5 @@ Route::group(['prefix' => 'admin'], function () {
     Route::get('/subjects-and-faculties', [AdminController::class, 'get_subjects_and_faculties_api']);
     Route::get('/library/books-for-book-self', [AdminController::class, 'get_books_for_book_self_api']);
     Route::get("/students", [AdminController::class, 'get_student_api']);
+    Route::get('/library/books', [AdminController::class, 'get_library_books']);
 });

@@ -47,18 +47,18 @@
 @section('title', 'library/add-new-student-record')
 
 @section('main')
-    <h1>Library: Add new student record</h1>
+    <h1>Library: Add student record</h1>
     <form action="">
         @csrf
         <div>
-            <label for="student">Select Student</label>
-            <select name="student" id="student">
+            <label for="students">Select Student</label>
+            <select name="student" id="students">
             </select>
         </div>
         <div>
-            <label for="book">Select Book</label>
-            <select name="book" id="book">
-                <option value="" default>Select Book</option>
+            <label for="books">Select Book</label>
+            <select name="book" id="books">
+
             </select>
         </div>
         <div>
@@ -74,4 +74,26 @@
 @endsection
 
 @section('script')
+    <script type="text/javascript">
+        (async () => {
+            // Fetch student data
+            const resStudents = await fetch("/api/admin/students");
+            const students = await resStudents.json();
+            let studentSelectOptionsElm = "<option value='' default>Select Student</option>"
+            students.forEach((student) => {
+                studentSelectOptionsElm += `<option value='${student.id}'>${student.name}</option>`
+            })
+            document.getElementById('students').innerHTML = studentSelectOptionsElm;
+
+            // Fetch library books data
+            const resLibraryBooks = await fetch("/api/admin/library/books");
+            const libraryBooks = await resLibraryBooks.json();
+            let libraryBooksSelectOptionsElm = "<option value='' default>Select Book</option>";
+            libraryBooks.forEach((libraryBook) => {
+                libraryBooksSelectOptionsElm +=
+                    `<option value='${libraryBook.id}'>${libraryBook.book.name}</option>`
+            });
+            document.getElementById('books').innerHTML = libraryBooksSelectOptionsElm;
+        })()
+    </script>
 @endsection

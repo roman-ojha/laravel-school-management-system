@@ -274,4 +274,12 @@ class AdminController extends Controller
         $students = Student::select(['id', 'name'])->get();
         return $students;
     }
+
+    public function get_library_books()
+    {
+        $libraryBooks = Library::select(['id', 'book_id'])->with(['book' => function ($q) {
+            $q->select(['id', 'name']);
+        }])->get();
+        return $libraryBooks;
+    }
 }
