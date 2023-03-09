@@ -267,15 +267,14 @@ class AdminController extends Controller
 
     public function library_student_records()
     {
-        // $library_students = Library::select(['id', 'book_id',])->with(['students' => function ($q) {
-        //     $q->select(['id', 'name', 'faculty_id', 'batch', 'roll']);
-        // }])->get();
-        // error_log($library_students);
         $library_students = Student::select(['id', 'name', 'roll', 'batch', 'faculty_id'])->with(['library' => function ($qLibrary) {
             $qLibrary->select(['book_id'])->with(['book' => function ($qBook) {
                 $qBook->select(['id', 'name']);
             }]);
-        }])->get();
+        }, 'faculty' => function ($qFaculty) {
+            $qFaculty->select(['id', 'name']);
+        }])->whereHas('library')->get();
+
         return view("pages/library/student-records", ['library_students' => $library_students]);
     }
 
