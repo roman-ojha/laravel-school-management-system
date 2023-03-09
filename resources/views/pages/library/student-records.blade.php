@@ -32,6 +32,7 @@
             color: white;
             border-width: 0px;
             cursor: pointer;
+            margin-bottom: 3px;
         }
     </style>
 
@@ -53,6 +54,24 @@
             <th>Borrowed Books</th>
             <th>Delete</th>
         </tr>
+        @foreach ($library_students as $library_student)
+            <tr>
+                <td>{{ $library_student['name'] }}</td>
+                <td>{{ $library_student['roll'] }}</td>
+                <td>{{ $library_student['batch'] }}</td>
+                <td>{{ $library_student['faculty_id'] }}</td>
+                <td>
+                    @foreach ($library_student['library'] as $lib)
+                        <p>{{ $lib['book']['name'] }}</p>
+                    @endforeach
+                </td>
+                <td>
+                    @foreach ($library_student['library'] as $lib)
+                        <button class="delete-button">Delete</button><br />
+                    @endforeach
+                </td>
+            </tr>
+        @endforeach
     </table>
     @include('layout.navigate-to-admin')
 

@@ -8,5 +8,5 @@ use Illuminate\Database\Eloquent\Model;
 class LibraryStudent extends Model
 {
     use HasFactory;
-    public $table = "";
+    public $table = "library_students";
 }

@@ -10,6 +10,7 @@ use App\Models\Book;
 use App\Models\Faculty;
 use App\Models\Library;
 use App\Models\Subject;
+use App\Models\LibraryStudent;
 
 class AdminController extends Controller
 {
@@ -266,7 +267,16 @@ class AdminController extends Controller
 
     public function library_student_records()
     {
-        return view("pages/library/student-records");
+        // $library_students = Library::select(['id', 'book_id',])->with(['students' => function ($q) {
+        //     $q->select(['id', 'name', 'faculty_id', 'batch', 'roll']);
+        // }])->get();
+        // error_log($library_students);
+        $library_students = Student::select(['id', 'name', 'roll', 'batch', 'faculty_id'])->with(['library' => function ($qLibrary) {
+            $qLibrary->select(['book_id'])->with(['book' => function ($qBook) {
+                $qBook->select(['id', 'name']);
+            }]);
+        }])->get();
+        return view("pages/library/student-records", ['library_students' => $library_students]);
     }
 
     public function get_student_api()
@@ -287,10 +297,23 @@ class AdminController extends Controller
 
     public function library_add_student_record(Request $req)
     {
-        if (!$req->filled('student') || !$req->filled('book')) {
-            return view('pages/library/add-new-student-record', ['error' => "All field is required"]);
+        try {
+
+            if (!$req->filled('student') || !$req->filled('book')) {
+                return view('pages/library/add-new-student-record', ['error' => "All field is required"]);
+            }
+            $student = $req->input('student');
+            $book = $req->input('book');
+            $library_Student = new LibraryStudent();
+            $library_Student->student_id = $student;
+            $library_Student->library_id = $book;
+            if ($library_Student->save()) {
+                Library::find($book)->decrement('quantity');
+                return redirect()->route('library-student-records');
+            }
+            return view('pages/library/add-new-student-record', ['error' => "Server Error!!!"]);
+        } catch (Exception $err) {
+            return view('pages/library/add-new-student-record', ['error' => "Server Error!!!"]);
         }
-        $student = $req->input('student');
-        $book = $req->input('book');
     }
 }
