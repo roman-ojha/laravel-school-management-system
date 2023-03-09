@@ -25,3 +25,7 @@
 .admin-anchor:hover {
     transform: scale(1.02);
 }
+body {
+    display: grid;
+    place-items: center;
+}

@@ -263,4 +263,9 @@ class AdminController extends Controller
         } catch (Exception $err) {
         }
     }
+
+    public function library_student_records()
+    {
+        return view("pages/library/student-records");
+    }
 }
