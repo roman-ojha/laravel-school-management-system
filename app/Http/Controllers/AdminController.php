@@ -268,4 +268,10 @@ class AdminController extends Controller
     {
         return view("pages/library/student-records");
     }
+
+    public function get_student_api()
+    {
+        $students = Student::select(['id', 'name'])->get();
+        return $students;
+    }
 }

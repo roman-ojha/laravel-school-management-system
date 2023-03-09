@@ -8,9 +8,10 @@
 
 @endsection
 
-@section('title', 'dymmy')
+@section('title', 'Library/Add new student record')
 
 @section('main')
+    <h1>Add new Student Record on library</h1>
 @endsection
 
 @section('script')
