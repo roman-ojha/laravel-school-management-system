@@ -43,4 +43,5 @@ Route::group(['prefix' => 'admin'], function () {
     Route::post('/add-book-into-book-self', [AdminController::class, 'add_book_into_book_self'])->name('admin-add-book-int-book-self');
     Route::get("/library/students-record", [AdminController::class, 'library_student_records'])->name('library-student-records');
     Route::view('/library/add-student-record', 'pages/library/add-new-student-record')->name('library-add-new-student-record');
+    Route::post("/library/add-student-record", [AdminController::class, 'library_add_student_record'])->name('library-add-student-record');
 });

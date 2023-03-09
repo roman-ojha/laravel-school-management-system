@@ -48,7 +48,7 @@
 
 @section('main')
     <h1>Library: Add student record</h1>
-    <form action="">
+    <form action="{{ route('library-add-student-record') }}" method="POST">
         @csrf
         <div>
             <label for="students">Select Student</label>
@@ -81,7 +81,8 @@
             const students = await resStudents.json();
             let studentSelectOptionsElm = "<option value='' default>Select Student</option>"
             students.forEach((student) => {
-                studentSelectOptionsElm += `<option value='${student.id}'>${student.name}</option>`
+                studentSelectOptionsElm +=
+                    `<option value='${student.id}'>Name: ${student.name}, Batch: ${student.batch}, Faculty: ${student.faculty.name}, Roll.No: ${student.roll}</option>`
             })
             document.getElementById('students').innerHTML = studentSelectOptionsElm;
 

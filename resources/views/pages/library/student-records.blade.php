@@ -47,6 +47,9 @@
     <table border="1">
         <tr>
             <th>Name</th>
+            <th>Roll</th>
+            <th>Batch</th>
+            <th>Faculty</th>
             <th>Borrowed Books</th>
             <th>Delete</th>
         </tr>

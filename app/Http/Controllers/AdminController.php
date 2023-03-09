@@ -271,7 +271,9 @@ class AdminController extends Controller
 
     public function get_student_api()
     {
-        $students = Student::select(['id', 'name'])->get();
+        $students = Student::select(['id', 'name', 'roll', 'batch', 'faculty_id'])->with(['faculty' => function ($q) {
+            $q->select('id', 'name');
+        }])->get();
         return $students;
     }
 
@@ -281,5 +283,14 @@ class AdminController extends Controller
             $q->select(['id', 'name']);
         }])->get();
         return $libraryBooks;
+    }
+
+    public function library_add_student_record(Request $req)
+    {
+        if (!$req->filled('student') || !$req->filled('book')) {
+            return view('pages/library/add-new-student-record', ['error' => "All field is required"]);
+        }
+        $student = $req->input('student');
+        $book = $req->input('book');
     }
 }
