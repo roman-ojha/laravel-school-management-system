@@ -54,7 +54,7 @@ class AdminController extends Controller
                 $faculties = Faculty::select(['id', 'name'])->get();
                 return view('admin/add_student', ['error' => 'Server Error!!!', 'faculties' => $faculties]);
             }
-            return redirect()->route('admin-students');
+            return redirect()->route('students');
         } catch (Exception $err) {
             // error_log($err);
             return view('admin/add_student', ['error' => 'Server Error!!!']);

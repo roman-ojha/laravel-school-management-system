@@ -3,14 +3,13 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AdminController;
 
+// Student:
+Route::get('/students', [AdminController::class, 'students'])->name('students');
+Route::get('/student', [AdminController::class, 'add_student_view'])->name('add-student-view');
+Route::post('/student', [AdminController::class, 'add_student'])->name('add-student');
+Route::get('/student/{id}', [AdminController::class, 'delete_student'])->name('delete-student');
 Route::group(['prefix' => 'admin'], function () {
-    // Student:
     Route::get('/', [AdminController::class, 'index'])->name('admin');
-    Route::get('/students', [AdminController::class, 'students'])->name('admin-students');
-    Route::get('/student', [AdminController::class, 'add_student_view'])->name('admin-view-add-student');
-    Route::post('/student', [AdminController::class, 'add_student'])->name('admin-add-student');
-    Route::get('/student/{id}', [AdminController::class, 'delete_student'])->name('admin-delete-student');
-
     // Teacher:
     Route::get('/teachers', [AdminController::class, 'teachers'])->name('admin-teachers');
     Route::view('/teacher', 'admin/add_teacher')->name('admin-view-add-teacher');

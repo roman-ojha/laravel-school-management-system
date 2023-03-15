@@ -41,7 +41,7 @@
 @section('main')
     <h1>Students</h1>
     <div class="add-button">
-        <a href="{{ route('admin-view-add-student') }}">Add new Student</a>
+        <a href="{{ route('add-student-view') }}">Add new Student</a>
     </div>
     <div id="students-list-component">
         <x-students-list :students="$students" />
@@ -53,7 +53,7 @@
     <script type="text/javascript">
         async function deleteStudent(id) {
             // delete according to given id
-            const res = await fetch(`/admin/student/${id}`, {
+            const res = await fetch(`/student/${id}`, {
                 method: "GET",
             });
 
