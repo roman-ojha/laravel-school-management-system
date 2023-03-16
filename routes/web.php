@@ -2,12 +2,15 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\StudentController;
 
 // Student:
-Route::get('/students', [AdminController::class, 'students'])->name('students');
-Route::get('/student', [AdminController::class, 'add_student_view'])->name('add-student-view');
-Route::post('/student', [AdminController::class, 'add_student'])->name('add-student');
-Route::get('/student/{id}', [AdminController::class, 'delete_student'])->name('delete-student');
+Route::group(['prefix' => 'student'], function () {
+    Route::get('/', [StudentController::class, 'students'])->name('students');
+    Route::get('/new', [StudentController::class, 'add_student_view'])->name('add-student-view');
+    Route::post('/', [StudentController::class, 'add_student'])->name('add-student');
+    Route::get('/{id}', [StudentController::class, 'delete_student'])->name('delete-student');
+});
 Route::group(['prefix' => 'admin'], function () {
     Route::get('/', [AdminController::class, 'index'])->name('admin');
     // Teacher:
