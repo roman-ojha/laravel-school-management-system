@@ -73,3 +73,7 @@ Route::group(['prefix' => 'library'], function () {
 Route::group(['prefix' => 'admin'], function () {
     Route::get('/', [AdminController::class, 'index'])->name('admin');
 });
+
+// Auth
+Route::view('/login', 'pages.auth.login');
+Route::view('/register', 'pages.auth.register');
