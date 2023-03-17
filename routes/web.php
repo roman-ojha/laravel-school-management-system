@@ -5,6 +5,7 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\StudentController;
 use App\Http\Controllers\TeacherController;
 use App\Http\Controllers\BookController;
+use App\Http\Controllers\FacultyController;
 
 // Student:
 Route::group(['prefix' => 'student'], function () {
@@ -32,10 +33,10 @@ Route::group(['prefix' => 'book'], function () {
 
 // Faculties:
 Route::group(['prefix' => 'faculty'], function () {
-    Route::get('/', [AdminController::class, 'faculties'])->name('faculties');
-    Route::view('/new', 'admin/add_faculty')->name('add-faculty-view');
-    Route::post('/new', [AdminController::class, 'add_faculty'])->name('add-faculty');
-    Route::delete('/{id}', [AdminController::class, 'delete_faculty'])->name('delete-faculty');
+    Route::get('/', [FacultyController::class, 'faculties'])->name('faculties');
+    Route::view('/new', 'pages.faculty.add_faculty')->name('add-faculty-view');
+    Route::post('/new', [FacultyController::class, 'add_faculty'])->name('add-faculty');
+    Route::delete('/{id}', [FacultyController::class, 'delete_faculty'])->name('delete-faculty');
 });
 
 
