@@ -41,7 +41,7 @@
 @section('main')
     <h1>Faculties</h1>
     <div class="add-button">
-        <a href="{{ route('admin-view-add-faculty') }}">Add new Faculty</a>
+        <a href="{{ route('add-faculty-view') }}">Add new Faculty</a>
     </div>
     <div id="faculties-list-component">
         <x-faculties-list :faculties="$faculties" />
@@ -53,7 +53,7 @@
     <script>
         async function deleteFaculty(id) {
             try {
-                const res = await fetch(`/admin/faculty/${id}`, {
+                const res = await fetch(`/faculty/${id}`, {
                     method: "DELETE",
                     headers: {
                         "X-CSRF-Token": "{{ csrf_token() }}"

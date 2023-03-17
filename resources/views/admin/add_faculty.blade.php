@@ -47,7 +47,7 @@
 
 @section('main')
     <h1>Add new Faculty</h1>
-    <form action="{{ route('admin-add-faculty') }}" method="POST">
+    <form action="{{ route('add-faculty') }}" method="POST">
         @csrf
         <div>
             <label for="name">Name</label>
@@ -63,7 +63,7 @@
     @endif
 
     <div class="faculties-button">
-        <a href="{{ route('admin-faculties') }}">Show Books</a>
+        <a href="{{ route('faculties') }}">Show Faculties</a>
     </div>
 @endsection
 

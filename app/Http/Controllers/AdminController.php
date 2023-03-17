@@ -37,7 +37,7 @@ class AdminController extends Controller
         if (!$saved) {
             return view('admin/add_faculty', ['error' => "Server Error!!!"]);
         }
-        return redirect()->route('admin-faculties');
+        return redirect()->route('faculties');
     }
 
     public function delete_faculty(Request $req, $id)

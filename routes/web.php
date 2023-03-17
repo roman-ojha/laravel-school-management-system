@@ -16,7 +16,7 @@ Route::group(['prefix' => 'student'], function () {
 
 // Teacher:
 Route::group(['prefix' => 'teacher'], function () {
-    Route::get('', [TeacherController::class, 'teachers'])->name('teachers');
+    Route::get('/', [TeacherController::class, 'teachers'])->name('teachers');
     Route::view('/new', 'pages.teacher.add_teacher')->name('add-teacher-view');
     Route::post('/new', [TeacherController::class, 'add_teacher'])->name('add-teacher');
     Route::delete('/{id}', [TeacherController::class, 'delete_teacher'])->name('delete-teacher');
@@ -24,21 +24,26 @@ Route::group(['prefix' => 'teacher'], function () {
 
 // Books:
 Route::group(['prefix' => 'book'], function () {
-    Route::get('', [BookController::class, 'books'])->name('books');
+    Route::get('/', [BookController::class, 'books'])->name('books');
     Route::view('/new', 'pages.book.add_book')->name('add-book-view');
     Route::post('/new', [BookController::class, 'add_book'])->name('add-book');
     Route::delete('/{id}', [BookController::class, 'delete_book'])->name('delete-book');
 });
 
+// Faculties:
+Route::group(['prefix' => 'faculty'], function () {
+    Route::get('/', [AdminController::class, 'faculties'])->name('faculties');
+    Route::view('/new', 'admin/add_faculty')->name('add-faculty-view');
+    Route::post('/new', [AdminController::class, 'add_faculty'])->name('add-faculty');
+    Route::delete('/{id}', [AdminController::class, 'delete_faculty'])->name('delete-faculty');
+});
+
+
+
 Route::group(['prefix' => 'admin'], function () {
     Route::get('/', [AdminController::class, 'index'])->name('admin');
 
 
-    // Faculties:
-    Route::get('/faculties', [AdminController::class, 'faculties'])->name('admin-faculties');
-    Route::view('/faculty', 'admin/add_faculty')->name('admin-view-add-faculty');
-    Route::post('/faculty', [AdminController::class, 'add_faculty'])->name('admin-add-faculty');
-    Route::delete('/faculty/{id}', [AdminController::class, 'delete_faculty'])->name('admin-delete-faculty');
 
 
     // Subjects:
