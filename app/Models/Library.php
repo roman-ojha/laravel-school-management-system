@@ -21,4 +21,9 @@ class Library extends Model
     {
         return $this->belongsToMany(Student::class, 'library_students');
     }
+
+    public function teachers()
+    {
+        return $this->belongsToMany(Teacher::class, 'library_teachers');
+    }
 }

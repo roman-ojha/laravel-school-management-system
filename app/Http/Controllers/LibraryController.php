@@ -90,4 +90,17 @@ class LibraryController extends Controller
             return view('pages.library.add-new-student-record', ['error' => "Server Error!!!"]);
         }
     }
+
+    public function delete_book_from_book_self(Request $req, $id)
+    {
+        try {
+            $library = Library::find($id);
+            $library->students()->detach();
+            $library->teachers()->detach();
+            $library->delete();
+            $library = Library::all();
+            return view('components.book-self-book-list', ['book_self' => $library]);
+        } catch (Exception $err) {
+        }
+    }
 }

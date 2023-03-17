@@ -44,12 +44,22 @@
     </div>
     <div id="book-self-list-component">
         <x-book-self-book-list :bookSelf="$book_self" />
-        {{-- <x-teachers-list :teachers="$teachers" /> --}}
     </div>
     @include('layout.navigate-to-admin')
 @endsection
 
 @section('script')
     {{-- @vite('resources/js/') --}}
-    <script type="text/javascript"></script>
+    <script type="text/javascript">
+        async function deleteBook(id) {
+            const res = await fetch(`/library/book-self/${id}`, {
+                method: "DELETE",
+                headers: {
+                    "X-CSRF-Token": "{{ csrf_token() }}"
+                }
+            });
+            const resText = await res.text();
+            document.getElementById('book-self-list-component').innerHTML = resText;
+        }
+    </script>
 @endsection
