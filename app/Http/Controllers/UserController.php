@@ -16,7 +16,7 @@ class UserController extends Controller
         return redirect()->route('login')->with(['error' => "Please login first"]);
     }
 
-    public function sign_out(Request $req)
+    public function logout(Request $req)
     {
         Auth::logout();
         $req->session()->flush();

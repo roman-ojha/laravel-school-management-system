@@ -68,6 +68,7 @@ Route::group(['middleware' => ['userAuth']], function () {
     Route::group(['prefix' => 'admin'], function () {
         Route::get('/', [AdminController::class, 'index'])->name('admin');
     });
+    Route::get('/logout', [UserController::class, 'logout'])->name('logout');
 });
 
 // Auth
