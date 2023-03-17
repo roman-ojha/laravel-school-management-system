@@ -21,14 +21,17 @@ Route::group(['prefix' => 'teacher'], function () {
     Route::delete('/{id}', [TeacherController::class, 'delete_teacher'])->name('delete-teacher');
 });
 
+// Books:
+Route::group(['prefix' => 'book'], function () {
+    Route::get('', [AdminController::class, 'books'])->name('books');
+    Route::view('/new', 'admin/add_book')->name('add-book-view');
+    Route::post('/new', [AdminController::class, 'add_book'])->name('add-book');
+    Route::delete('/{id}', [AdminController::class, 'delete_book'])->name('delete-book');
+});
+
 Route::group(['prefix' => 'admin'], function () {
     Route::get('/', [AdminController::class, 'index'])->name('admin');
 
-    // Books:
-    Route::get('/books', [AdminController::class, 'books'])->name('admin-books');
-    Route::view('/book', 'admin/add_book')->name('admin-view-add-book');
-    Route::post('/book', [AdminController::class, 'add_book'])->name('admin-add-book');
-    Route::delete('/book/{id}', [AdminController::class, 'delete_book'])->name('admin-delete-book');
 
     // Faculties:
     Route::get('/faculties', [AdminController::class, 'faculties'])->name('admin-faculties');
