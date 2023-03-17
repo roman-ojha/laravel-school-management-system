@@ -23,7 +23,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::get("/students", [StudentController::class, 'get_student_api']);
+Route::get("/students", [StudentController::class, 'get_students_api']);
 Route::get('/subjects-and-faculties', [SubjectController::class, 'get_subjects_and_faculties_api']);
 Route::get('/library/books-for-book-self', [LibraryController::class, 'get_books_for_book_self_api']);
 Route::get('/library/books', [LibraryController::class, 'get_library_books']);

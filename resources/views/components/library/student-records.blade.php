@@ -9,7 +9,7 @@
     </tr>
     @foreach ($library_students as $library_student)
         <tr>
-            <td>{{ $library_student['name'] }}</td>
+            <td>{{ $library_student['user']['name'] }}</td>
             <td>{{ $library_student['roll'] }}</td>
             <td>{{ $library_student['batch'] }}</td>
             <td>{{ $library_student['faculty']['name'] }}</td>

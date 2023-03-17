@@ -46,21 +46,4 @@ class AuthController extends Controller
             }
         }
     }
-
-    public function index(Request $req)
-    {
-        if (Auth::check()) {
-            error_log($req->user());
-            return view('pages.index');
-        }
-        return redirect()->route('login')->with(['error' => "Please login first"]);
-    }
-
-    public function sign_out(Request $req)
-    {
-        Auth::logout();
-        $req->session()->flush();
-        $req->session()->regenerate();
-        return redirect()->route('login');
-    }
 }

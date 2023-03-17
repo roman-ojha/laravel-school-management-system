@@ -49,12 +49,14 @@ class LibraryController extends Controller
 
     public function library_student_records()
     {
-        $library_students = Student::select(['id', 'name', 'roll', 'batch', 'faculty_id'])->with(['library' => function ($qLibrary) {
+        $library_students = Student::select(['id', 'roll', 'batch', 'faculty_id', 'user_id'])->with(['library' => function ($qLibrary) {
             $qLibrary->select(['book_id'])->with(['book' => function ($qBook) {
                 $qBook->select(['id', 'name']);
             },]);
         }, 'faculty' => function ($qFaculty) {
             $qFaculty->select(['id', 'name']);
+        }, 'user' => function ($q) {
+            $q->select('id', 'name');
         }])->whereHas('library')->get();
 
         return view("pages.library.student-records", ['library_students' => $library_students]);

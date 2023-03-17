@@ -7,23 +7,27 @@ use App\Models\Student;
 use App\Models\Faculty;
 use App\Models\User;
 use Exception;
+use Hash;
 
 class StudentController extends Controller
 {
-    public function students()
+    public function get_students()
     {
-        $students = Student::select(['id', 'batch', 'roll', 'faculty_id', 'user_id'])->with(['faculty' => function ($q) {
+        return Student::select(['id', 'batch', 'roll', 'faculty_id', 'user_id'])->with(['faculty' => function ($q) {
             $q->select('id', 'name');
         }, 'user' => function ($q) {
             $q->select('id', 'name', 'email');
         }])->get();
-        return view('pages/student/index', ['students' => $students]);
+    }
+
+    public function students()
+    {
+        return view('pages/student/index', ['students' => $this->get_students()]);
     }
 
     public function add_student_view()
     {
-        $faculties = Faculty::select(['id', 'name'])->get();
-        return view('pages/student/add_student', ['error' => '', 'faculties' => $faculties]);
+        return view('pages/student/add_student');
     }
 
     public function add_student(Request $req)
@@ -42,14 +46,13 @@ class StudentController extends Controller
             $roll = $req->input('roll');
             $batch = $req->input()['batch'];
             $student = new Student();
-            $student->name = $name;
             $student->roll = $roll;
             $student->batch = $batch;
             $student->faculty_id = $req->input('faculty');
             $user = new User();
             $user->name = $name;
             $user->email = $req->input('email');
-            $user->password = $req->input('password');
+            $user->password = Hash::make($req->input('password'));
             $user->save();
             $user->student()->save($student);
             return redirect()->route('students');
@@ -61,22 +64,16 @@ class StudentController extends Controller
 
     public function delete_student(Request $req, $id)
     {
-        $student = Student::find($id);
-        $student->library()->detach();
-        $student->delete();
+        $user = User::find($id);
+        $user->student->library()->detach();
+        $user->student()->delete();
+        $user->delete();
 
-        $newStudents = Student::all();
-
-        // $studentsListComp = new StudentsList($newStudents);
-        // return $studentsListComp->render();
-        return view('components.students-list', ['students' => $newStudents]);
+        return view('components.students-list', ['students' => $this->get_students()]);
     }
 
-    public function get_student_api()
+    public function get_students_api()
     {
-        $students = Student::select(['id', 'name', 'roll', 'batch', 'faculty_id'])->with(['faculty' => function ($q) {
-            $q->select('id', 'name');
-        }])->get();
-        return $students;
+        return $this->get_students();
     }
 }

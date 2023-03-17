@@ -82,7 +82,7 @@
             let studentSelectOptionsElm = "<option value='' default>Select Student</option>"
             students.forEach((student) => {
                 studentSelectOptionsElm +=
-                    `<option value='${student.id}'>Name: ${student.name}, Batch: ${student.batch}, Faculty: ${student.faculty.name}, Roll.No: ${student.roll}</option>`
+                    `<option value='${student.id}'>Name: ${student.user.name}, Batch: ${student.batch}, Faculty: ${student.faculty.name}, Roll.No: ${student.roll}</option>`
             })
             document.getElementById('students').innerHTML = studentSelectOptionsElm;
 

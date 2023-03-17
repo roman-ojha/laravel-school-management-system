@@ -59,7 +59,7 @@
     @if (Session::has('error'))
         <p class="error">{{ Session::get('error') }}</p>
     @endif
-    <p>Doesn't have account? <a href="{{ route('register') }}">create here</a></p>
+    {{-- <p>Doesn't have account? <a href="{{ route('register') }}">create here</a></p> --}}
 @endsection
 
 @section('script')

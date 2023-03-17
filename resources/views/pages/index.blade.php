@@ -8,8 +8,8 @@
     @parent
 @endsection
 
-@section('title', 'Library/Add new student record')
-
+@section('title', 'Dashboard')
+<h1>Hello {{ $user['name'] }}</h1>
 @section('main')
 
 @endsection
