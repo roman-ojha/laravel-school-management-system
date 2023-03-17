@@ -10,6 +10,8 @@ use App\Http\Controllers\FacultyController;
 use App\Http\Controllers\SubjectController;
 use App\Http\Controllers\LibraryController;
 
+Route::get('/', [AuthController::class, 'index']);
+
 // Student:
 Route::group(['prefix' => 'student'], function () {
     Route::get('/', [StudentController::class, 'students'])->name('students');
