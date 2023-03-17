@@ -46,7 +46,7 @@
 
 @section('main')
     <h1>Add Teacher</h1>
-    <form action="{{ route('admin-add-teacher') }}" method="POST">
+    <form action="{{ route('add-teacher') }}" method="POST">
         @csrf
         <div>
             <label for="name">Name</label>
@@ -76,7 +76,7 @@
     @endif
 
     <div class="teachers-button">
-        <a href="{{ route('admin-teachers') }}">Show Teachers</a>
+        <a href="{{ route('teachers') }}">Show Teachers</a>
     </div>
 @endsection
 
@@ -84,9 +84,8 @@
     {{-- @vite('resources/js/') --}}
     <script type="text/javascript">
         (async function() {
-            const res = await fetch("/api/admin/subjects-and-faculties");
+            const res = await fetch("/api/subjects-and-faculties");
             const data = await res.json();
-            console.log(data);
             var teachesOptions = "";
             var facultiesOptions = "";
             data.subjects.forEach((value, index) => {

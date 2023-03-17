@@ -8,16 +8,20 @@ use App\Http\Controllers\StudentController;
 Route::group(['prefix' => 'student'], function () {
     Route::get('/', [StudentController::class, 'students'])->name('students');
     Route::get('/new', [StudentController::class, 'add_student_view'])->name('add-student-view');
-    Route::post('/', [StudentController::class, 'add_student'])->name('add-student');
+    Route::post('/new', [StudentController::class, 'add_student'])->name('add-student');
     Route::get('/{id}', [StudentController::class, 'delete_student'])->name('delete-student');
 });
+
+// Teacher:
+Route::group(['prefix' => 'teacher'], function () {
+    Route::get('', [AdminController::class, 'teachers'])->name('teachers');
+    Route::view('/new', 'admin/add_teacher')->name('add-teacher-view');
+    Route::post('/new', [AdminController::class, 'add_teacher'])->name('add-teacher');
+    Route::delete('/{id}', [AdminController::class, 'delete_teacher'])->name('delete-teacher');
+});
+
 Route::group(['prefix' => 'admin'], function () {
     Route::get('/', [AdminController::class, 'index'])->name('admin');
-    // Teacher:
-    Route::get('/teachers', [AdminController::class, 'teachers'])->name('admin-teachers');
-    Route::view('/teacher', 'admin/add_teacher')->name('admin-view-add-teacher');
-    Route::post('/teacher', [AdminController::class, 'add_teacher'])->name('admin-add-teacher');
-    Route::delete('/teacher/{id}', [AdminController::class, 'delete_teacher'])->name('admin-delete-teacher');
 
     // Books:
     Route::get('/books', [AdminController::class, 'books'])->name('admin-books');

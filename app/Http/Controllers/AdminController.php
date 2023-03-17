@@ -45,7 +45,7 @@ class AdminController extends Controller
             if (!$saved) {
                 return view('admin/add_teacher', ['error' => 'Server Error!!!']);
             }
-            return redirect()->route('admin-teachers');
+            return redirect()->route('teachers');
         } catch (Exception $err) {
             return view('admin/add_teacher', ['error' => 'Server Error!!!']);
         }
