@@ -28,18 +28,6 @@
         .error {
             color: red;
         }
-
-        .books-button {
-            border: 2px solid black;
-            padding: 5px 10px;
-            border-radius: 5px;
-            margin-top: 10px;
-        }
-
-        .books-button a {
-            text-decoration: none;
-            color: black;
-        }
     </style>
 @endsection
 
