@@ -63,4 +63,12 @@ class StudentController extends Controller
         // return $studentsListComp->render();
         return view('components.students-list', ['students' => $newStudents]);
     }
+
+    public function get_student_api()
+    {
+        $students = Student::select(['id', 'name', 'roll', 'batch', 'faculty_id'])->with(['faculty' => function ($q) {
+            $q->select('id', 'name');
+        }])->get();
+        return $students;
+    }
 }

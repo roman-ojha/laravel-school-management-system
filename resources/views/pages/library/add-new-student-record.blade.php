@@ -77,7 +77,7 @@
     <script type="text/javascript">
         (async () => {
             // Fetch student data
-            const resStudents = await fetch("/api/admin/students");
+            const resStudents = await fetch("/api/students");
             const students = await resStudents.json();
             let studentSelectOptionsElm = "<option value='' default>Select Student</option>"
             students.forEach((student) => {
@@ -87,7 +87,7 @@
             document.getElementById('students').innerHTML = studentSelectOptionsElm;
 
             // Fetch library books data
-            const resLibraryBooks = await fetch("/api/admin/library/books");
+            const resLibraryBooks = await fetch("/api/library/books");
             const libraryBooks = await resLibraryBooks.json();
             let libraryBooksSelectOptionsElm = "<option value='' default>Select Book</option>";
             libraryBooks.forEach((libraryBook) => {

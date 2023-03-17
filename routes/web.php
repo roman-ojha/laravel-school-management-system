@@ -7,6 +7,8 @@ use App\Http\Controllers\TeacherController;
 use App\Http\Controllers\BookController;
 use App\Http\Controllers\FacultyController;
 use App\Http\Controllers\SubjectController;
+use App\Http\Controllers\LibraryController;
+use App\Models\Library;
 
 // Student:
 Route::group(['prefix' => 'student'], function () {
@@ -50,15 +52,21 @@ Route::group(['prefix' => 'subject'], function () {
     Route::delete('/{id}', [SubjectController::class, 'delete_subject'])->name('delete-subject');
 });
 
+// Library:
+Route::group(['prefix' => 'library'], function () {
+    Route::view("/", "pages.library.index")->name("library-view");
+    Route::group(['prefix' => 'book-self'], function () {
+        Route::get('/', [LibraryController::class, 'book_self'])->name('book-self');
+        Route::view('/new', 'pages.library.add_book_self')->name('add-book-into-book-self');
+        Route::post('/new', [LibraryController::class, 'add_book_into_book_self'])->name('add-book-int-book-self');
+    });
+    Route::group(['prefix' => 'students-record'], function () {
+        Route::get("/", [LibraryController::class, 'library_student_records'])->name('library-student-records');
+        Route::view('/new', 'pages/library/add-new-student-record')->name('library-add-new-student-record');
+        Route::post("/new", [LibraryController::class, 'library_add_student_record'])->name('library-add-student-record');
+    });
+});
+
 Route::group(['prefix' => 'admin'], function () {
     Route::get('/', [AdminController::class, 'index'])->name('admin');
-
-    // Library:
-    Route::view("/library", "admin/library")->name("library-view");
-    Route::get('/library/book-self', [AdminController::class, 'book_self'])->name('book-self');
-    Route::view('/add-book-into-book-self', 'admin/add_book_self')->name('admin-add-book-into-book-self');
-    Route::post('/add-book-into-book-self', [AdminController::class, 'add_book_into_book_self'])->name('admin-add-book-int-book-self');
-    Route::get("/library/students-record", [AdminController::class, 'library_student_records'])->name('library-student-records');
-    Route::view('/library/add-student-record', 'pages/library/add-new-student-record')->name('library-add-new-student-record');
-    Route::post("/library/add-student-record", [AdminController::class, 'library_add_student_record'])->name('library-add-student-record');
 });
