@@ -5,14 +5,17 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Student;
 use App\Models\Faculty;
+use App\Models\User;
 use Exception;
 
 class StudentController extends Controller
 {
     public function students()
     {
-        $students = Student::select(['id', 'name', 'batch', 'roll', 'faculty_id'])->with(['faculty' => function ($q) {
+        $students = Student::select(['id', 'batch', 'roll', 'faculty_id', 'user_id'])->with(['faculty' => function ($q) {
             $q->select('id', 'name');
+        }, 'user' => function ($q) {
+            $q->select('id', 'name', 'email');
         }])->get();
         return view('pages/student/index', ['students' => $students]);
     }
@@ -25,25 +28,30 @@ class StudentController extends Controller
 
     public function add_student(Request $req)
     {
+        $req->validate([
+            'name' => 'required',
+            'email' => 'required|email|unique:users',
+            'roll' => 'required',
+            'batch' => 'required',
+            'faculty' => 'required',
+            'password' => 'required|min:6|max:15|confirmed',
+            'password_confirmation' => 'required|min:6|max:15',
+        ]);
         try {
-            if (!$req->filled('name') || !$req->filled('roll') || !$req->filled('batch') || !$req->filled('faculty')) {
-                $faculties = Faculty::select(['id', 'name'])->get();
-                return view('pages/student/add_student', ['error' => 'All field is required', 'faculties' => $faculties]);
-            }
             $name = $req->input('name');
             $roll = $req->input('roll');
             $batch = $req->input()['batch'];
-
             $student = new Student();
             $student->name = $name;
             $student->roll = $roll;
             $student->batch = $batch;
             $student->faculty_id = $req->input('faculty');
-            $saved = $student->save();
-            if (!$saved) {
-                $faculties = Faculty::select(['id', 'name'])->get();
-                return view('pages/student/add_student', ['error' => 'Server Error!!!', 'faculties' => $faculties]);
-            }
+            $user = new User();
+            $user->name = $name;
+            $user->email = $req->input('email');
+            $user->password = $req->input('password');
+            $user->save();
+            $user->student()->save($student);
             return redirect()->route('students');
         } catch (Exception $err) {
             // error_log($err);

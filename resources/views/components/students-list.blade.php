@@ -2,6 +2,7 @@
     <tr>
         <th>Roll</th>
         <th>Name</th>
+        <th>Email</th>
         <th>Batch</th>
         <th>Faculty</th>
         <th>Delete</th>
@@ -9,7 +10,8 @@
     @foreach ($students as $student)
         <tr>
             <td>{{ $student['roll'] }}</td>
-            <td>{{ $student['name'] }}</td>
+            <td>{{ $student['user']['name'] }}</td>
+            <td>{{ $student['user']['email'] }}</td>
             <td>{{ $student['batch'] }}</td>
             <td>{{ $student['faculty']['name'] }}</td>
             <td>
