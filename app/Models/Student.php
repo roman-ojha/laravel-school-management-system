@@ -18,4 +18,9 @@ class Student extends Model
     {
         return $this->belongsToMany(Library::class, 'library_students')->withPivot('id');
     }
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 }

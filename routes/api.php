@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\FacultyController;
 use App\Http\Controllers\LibraryController;
 use App\Http\Controllers\StudentController;
 use Illuminate\Http\Request;
@@ -26,3 +27,4 @@ Route::get("/students", [StudentController::class, 'get_student_api']);
 Route::get('/subjects-and-faculties', [SubjectController::class, 'get_subjects_and_faculties_api']);
 Route::get('/library/books-for-book-self', [LibraryController::class, 'get_books_for_book_self_api']);
 Route::get('/library/books', [LibraryController::class, 'get_library_books']);
+Route::get('/faculties', [FacultyController::class, 'get_faculties_api']);

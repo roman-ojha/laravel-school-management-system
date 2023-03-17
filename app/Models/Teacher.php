@@ -18,4 +18,9 @@ class Teacher extends Model
     {
         return $this->belongsToMany(Faculty::class, 'teachers_faculties');
     }
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 }

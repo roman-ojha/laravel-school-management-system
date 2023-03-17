@@ -41,4 +41,10 @@ class FacultyController extends Controller
         $faculties = Faculty::all();
         return view('components.faculties-list', ['faculties' => $faculties]);
     }
+
+    public function get_faculties_api()
+    {
+        $faculties = Faculty::all();
+        return $faculties;
+    }
 }

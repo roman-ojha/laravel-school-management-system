@@ -51,24 +51,54 @@
         @csrf
         <div>
             <label for="name">Name</label>
-            <input type="text" id="name" name="name" />
+            <input type="text" id="name" name="name" placeholder="Enter Name" />
+            @if ($errors->has('name'))
+                <p class="error">{{ $errors->first('name') }}</p>
+            @endif
+        </div>
+        <div>
+            <label for="email">Email</label>
+            <input type="email" placeholder="Enter Email" name="email" id="email" />
+            @if ($errors->has('email'))
+                <p class="error">{{ $errors->first('email') }}</p>
+            @endif
         </div>
         <div>
             <label for="roll">Roll</label>
-            <input type="number" id="roll" name="roll">
+            <input type="number" id="roll" name="roll" placeholder="Enter Roll No.">
+            @if ($errors->has('roll'))
+                <p class="error">{{ $errors->first('roll') }}</p>
+            @endif
         </div>
         <div>
             <label for="batch">Batch</label>
             <input type="date" id="batch" name="batch">
+            @if ($errors->has('batch'))
+                <p class="error">{{ $errors->first('batch') }}</p>
+            @endif
         </div>
         <div>
             <label for="faculty">Faculty</label>
             <select name="faculty" id="faculty">
-                <option value="" disabled>Select Faculty</option>
-                @foreach ($faculties as $faculty)
-                    <option value="{{ $faculty['id'] }}">{{ $faculty['name'] }}</option>
-                @endforeach
+                {{-- options --}}
             </select>
+            @if ($errors->has('faculty'))
+                <p class="error">{{ $errors->first('faculty') }}</p>
+            @endif
+        </div>
+        <div>
+            <label for="password">Password</label>
+            <input type="password" placeholder="Enter Password" name="password" id="password" />
+            @if ($errors->has('password'))
+                <p class="error">{{ $errors->first('password') }}</p>
+            @endif
+        </div>
+        <div>
+            <label for="password_confirmation">Confirm Password</label>
+            <input type="password" placeholder="Confirm Password" name="password_confirmation" id="password_confirmation" />
+            @if ($errors->has('password_confirmation'))
+                <p class="error">{{ $errors->first('password_confirmation') }}</p>
+            @endif
         </div>
         <div>
             <input type="submit" value="Add">
@@ -89,4 +119,17 @@
 
 @section('script')
     {{-- @vite('resources/js/') --}}
+    <script type="text/javascript">
+        (async function() {
+            const res = await fetch("/api/faculties");
+            const faculties = await res.json();
+            let facultiesOptions = "<option value='' disabled>Select Faculty</option>";
+            faculties.forEach((faculty) => {
+                facultiesOptions += ` 
+                    <option value="${faculty.id}">${faculty.name}</option>
+                `
+            })
+            document.getElementById('faculty').innerHTML = facultiesOptions;
+        })()
+    </script>
 @endsection
