@@ -13,7 +13,7 @@
     <a class="admin-anchor" href="{{ route('teachers') }}">Teachers</a>
     <a class="admin-anchor" href="{{ route('books') }}">Books</a>
     <a class="admin-anchor" href="{{ route('faculties') }}">Faculties</a>
-    <a class="admin-anchor" href="{{ route('admin-subjects') }}">Subjects</a>
+    <a class="admin-anchor" href="{{ route('subjects') }}">Subjects</a>
     <a class="admin-anchor" href="{{ route('library-view') }}">Library</a>
 @endsection
 

@@ -19,50 +19,6 @@ class AdminController extends Controller
         return view('admin/index');
     }
 
-    public function subjects()
-    {
-        $subjects = Subject::all();
-
-        return view('admin.subjects', ["subjects" => $subjects]);
-    }
-
-    public function get_subjects_and_faculties_api()
-    {
-        $subjects = Subject::select(["id", "name"])->get();
-        $faculties = Faculty::select(["id", "name"])->get();
-        return ['subjects' => $subjects, 'faculties' => $faculties];
-    }
-
-    public function add_subject(Request $req)
-    {
-        try {
-            if (!$req->filled('name')) {
-                return view('admin/add_subject', ['error' => "All field is required"]);
-            }
-            $subject = new Subject();
-            $subject->name = $req->input('name');
-            $saved = $subject->save();
-            if (!$saved) {
-                return view('admin/add_subject', ['error' => "Server Error!!!"]);
-            }
-            return redirect()->route('admin-subjects');
-        } catch (Exception $err) {
-        }
-    }
-
-    public function delete_subject(Request $req, $id)
-    {
-        try {
-            $subject = Subject::find($id);
-            $subject->teachers()->detach();
-            $subject->delete();
-            $new_subject = Subject::all();
-            return view('components/subjects-list', ['subjects' => $new_subject]);
-        } catch (Exception $err) {
-        }
-    }
-
-
     public function book_self()
     {
         $book_self = Library::select(['id', 'quantity', 'remaining', 'book_id'])->with(['book' => function ($q) {

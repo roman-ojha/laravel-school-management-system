@@ -40,7 +40,7 @@
 @section('main')
     <h1>Subjects</h1>
     <div class="add-button">
-        <a href="{{ route('admin-view-add-subject') }}">Add new Subject</a>
+        <a href="{{ route('add-subject-view') }}">Add new Subject</a>
     </div>
     <div id="subjects-list-component">
         <x-subjects-list :subjects="$subjects" />
@@ -52,7 +52,7 @@
     <script type="text/javascript">
         async function deleteSubject(id) {
             try {
-                const res = await fetch(`/admin/subject/${id}`, {
+                const res = await fetch(`/subject/${id}`, {
                     method: "DELETE",
                     headers: {
                         "X-CSRF-Token": "{{ csrf_token() }}"

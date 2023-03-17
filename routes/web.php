@@ -6,6 +6,7 @@ use App\Http\Controllers\StudentController;
 use App\Http\Controllers\TeacherController;
 use App\Http\Controllers\BookController;
 use App\Http\Controllers\FacultyController;
+use App\Http\Controllers\SubjectController;
 
 // Student:
 Route::group(['prefix' => 'student'], function () {
@@ -41,17 +42,16 @@ Route::group(['prefix' => 'faculty'], function () {
 
 
 
+// Subjects:
+Route::group(['prefix' => 'subject'], function () {
+    Route::get('/', [SubjectController::class, 'subjects'])->name('subjects');
+    Route::view('/new', 'pages.subject.add_subject')->name('add-subject-view');
+    Route::post('/new', [SubjectController::class, 'add_subject'])->name('add-subject');
+    Route::delete('/{id}', [SubjectController::class, 'delete_subject'])->name('delete-subject');
+});
+
 Route::group(['prefix' => 'admin'], function () {
     Route::get('/', [AdminController::class, 'index'])->name('admin');
-
-
-
-
-    // Subjects:
-    Route::get('/subjects', [AdminController::class, 'subjects'])->name('admin-subjects');
-    Route::view('/subject', 'admin/add_subject')->name('admin-view-add-subject');
-    Route::post('/subject', [AdminController::class, 'add_subject'])->name('admin-add-subject');
-    Route::delete('/subject/{id}', [AdminController::class, 'delete_subject'])->name('admin-delete-subject');
 
     // Library:
     Route::view("/library", "admin/library")->name("library-view");

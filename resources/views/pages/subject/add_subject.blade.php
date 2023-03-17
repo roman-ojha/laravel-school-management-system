@@ -47,7 +47,7 @@
 
 @section('main')
     <h1>Add new Subject</h1>
-    <form action="{{ route('admin-add-subject') }}" method="POST">
+    <form action="{{ route('add-subject') }}" method="POST">
         @csrf
         <div>
             <label for="name">Name</label>
@@ -63,7 +63,7 @@
     @endif
 
     <div class="subject-button">
-        <a href="{{ route('admin-subjects') }}">Show Subject</a>
+        <a href="{{ route('subjects') }}">Show Subject</a>
     </div>
 @endsection
 
