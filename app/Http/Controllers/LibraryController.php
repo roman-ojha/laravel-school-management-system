@@ -56,6 +56,7 @@ class LibraryController extends Controller
         }, 'faculty' => function ($qFaculty) {
             $qFaculty->select(['id', 'name']);
         }])->whereHas('library')->get();
+        error_log($library_students);
 
         return view("pages.library.student-records", ['library_students' => $library_students]);
     }
@@ -102,5 +103,11 @@ class LibraryController extends Controller
             return view('components.book-self-book-list', ['book_self' => $library]);
         } catch (Exception $err) {
         }
+    }
+
+    public function delete_student_record(Request $req, $student_id, $book_id)
+    {
+        error_log($student_id);
+        error_log($book_id);
     }
 }
