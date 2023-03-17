@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\StudentController;
+use App\Http\Controllers\TeacherController;
 
 // Student:
 Route::group(['prefix' => 'student'], function () {
@@ -14,10 +15,10 @@ Route::group(['prefix' => 'student'], function () {
 
 // Teacher:
 Route::group(['prefix' => 'teacher'], function () {
-    Route::get('', [AdminController::class, 'teachers'])->name('teachers');
-    Route::view('/new', 'admin/add_teacher')->name('add-teacher-view');
-    Route::post('/new', [AdminController::class, 'add_teacher'])->name('add-teacher');
-    Route::delete('/{id}', [AdminController::class, 'delete_teacher'])->name('delete-teacher');
+    Route::get('', [TeacherController::class, 'teachers'])->name('teachers');
+    Route::view('/new', 'pages.teacher.add_teacher')->name('add-teacher-view');
+    Route::post('/new', [TeacherController::class, 'add_teacher'])->name('add-teacher');
+    Route::delete('/{id}', [TeacherController::class, 'delete_teacher'])->name('delete-teacher');
 });
 
 Route::group(['prefix' => 'admin'], function () {
