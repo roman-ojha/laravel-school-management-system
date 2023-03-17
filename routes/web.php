@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\StudentController;
 use App\Http\Controllers\TeacherController;
+use App\Http\Controllers\BookController;
 
 // Student:
 Route::group(['prefix' => 'student'], function () {
@@ -23,10 +24,10 @@ Route::group(['prefix' => 'teacher'], function () {
 
 // Books:
 Route::group(['prefix' => 'book'], function () {
-    Route::get('', [AdminController::class, 'books'])->name('books');
-    Route::view('/new', 'admin/add_book')->name('add-book-view');
-    Route::post('/new', [AdminController::class, 'add_book'])->name('add-book');
-    Route::delete('/{id}', [AdminController::class, 'delete_book'])->name('delete-book');
+    Route::get('', [BookController::class, 'books'])->name('books');
+    Route::view('/new', 'pages.book.add_book')->name('add-book-view');
+    Route::post('/new', [BookController::class, 'add_book'])->name('add-book');
+    Route::delete('/{id}', [BookController::class, 'delete_book'])->name('delete-book');
 });
 
 Route::group(['prefix' => 'admin'], function () {
