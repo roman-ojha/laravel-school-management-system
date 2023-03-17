@@ -9,7 +9,6 @@ use App\Http\Controllers\BookController;
 use App\Http\Controllers\FacultyController;
 use App\Http\Controllers\SubjectController;
 use App\Http\Controllers\LibraryController;
-use App\Models\Library;
 
 // Student:
 Route::group(['prefix' => 'student'], function () {

@@ -48,21 +48,34 @@
 @section('main')
     <h1>Register</h1>
     <form action="{{ route('register') }}" method="POST">
+        @csrf
         <div>
             <label for="name">Name</label>
             <input type="text" placeholder="Enter Name" name="name" id="name" />
+            @if ($errors->has('name'))
+                <p class="error">{{ $errors->first('name') }}</p>
+            @endif
         </div>
         <div>
             <label for="email">Email</label>
             <input type="email" placeholder="Enter Email" name="email" id="email" />
+            @if ($errors->has('email'))
+                <p class="error">{{ $errors->first('email') }}</p>
+            @endif
         </div>
         <div>
             <label for="password">Password</label>
             <input type="password" placeholder="Enter Password" name="password" id="password" />
+            @if ($errors->has('password'))
+                <p class="error">{{ $errors->first('password') }}</p>
+            @endif
         </div>
         <div>
-            <label for="c_password">Confirm Password</label>
-            <input type="password" placeholder="Confirm Password" name="c_password" id="c_password" />
+            <label for="password_confirmation">Confirm Password</label>
+            <input type="password" placeholder="Confirm Password" name="password_confirmation" id="password_confirmation" />
+            @if ($errors->has('password_confirmation'))
+                <p class="error">{{ $errors->first('password_confirmation') }}</p>
+            @endif
         </div>
         <div>
             <input type="submit" id="register" name="register" value="register" />
