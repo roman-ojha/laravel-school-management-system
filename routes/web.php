@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\AuthController;
 use App\Http\Controllers\StudentController;
 use App\Http\Controllers\TeacherController;
 use App\Http\Controllers\BookController;
@@ -75,5 +76,7 @@ Route::group(['prefix' => 'admin'], function () {
 });
 
 // Auth
-Route::view('/login', 'pages.auth.login');
-Route::view('/register', 'pages.auth.register');
+Route::view('/login', 'pages.auth.login')->name('login-view');
+Route::post('/login', [AuthController::class, 'login'])->name('login');
+Route::view('/register', 'pages.auth.register')->name('register-view');
+Route::post('/register', [AuthController::class, 'register'])->name('register');

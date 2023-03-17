@@ -5,7 +5,7 @@
 @endsection
 
 @section('style')
-
+    @parent
 @endsection
 
 @section('title', 'Login')
