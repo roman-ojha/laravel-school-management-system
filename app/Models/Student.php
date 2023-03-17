@@ -16,6 +16,6 @@ class Student extends Model
 
     public function library()
     {
-        return $this->belongsToMany(Library::class, 'library_students');
+        return $this->belongsToMany(Library::class, 'library_students')->withPivot('id');
     }
 }

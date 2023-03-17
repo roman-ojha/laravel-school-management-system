@@ -64,7 +64,9 @@ Route::group(['prefix' => 'library'], function () {
     Route::group(['prefix' => 'students-record'], function () {
         Route::get("/", [LibraryController::class, 'library_student_records'])->name('library-student-records');
         Route::view('/new', 'pages/library/add-new-student-record')->name('library-add-new-student-record');
-        Route::post("/new?student_id={student_id}&book_id={book_id}", [LibraryController::class, 'library_add_student_record'])->name('library-add-student-record');
+        Route::post("/new", [LibraryController::class, 'library_add_student_record'])->name('library-add-student-record');
+        Route::delete("/", [LibraryController::class, 'delete_student_record'])->name('delete-library-student-record');
+        // /library/students-record?student_id=${student_id}&book_id=${book_id}
     });
 });
 

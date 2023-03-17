@@ -21,7 +21,7 @@
             <td>
                 @foreach ($library_student['library'] as $library)
                     <button class="delete-button"
-                        onclick="deleteStudentRecord({{ $library['pivot']['student_id'] }},{{ $library['pivot']['library_id'] }})">Delete</button><br />
+                        onclick="deleteStudentRecord({{ $library['pivot']['id'] }})">Delete</button><br />
                 @endforeach
             </td>
         </tr>

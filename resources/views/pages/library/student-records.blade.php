@@ -45,7 +45,9 @@
     <div class="add-button">
         <a href="{{ route('library-add-new-student-record') }}">Add new Student</a>
     </div>
-    <x-library.student-records :libraryStudents="$library_students" />
+    <div id="student-record-list-component">
+        <x-library.student-records :libraryStudents="$library_students" />
+    </div>
     @include('layout.navigate-to-admin')
 
 @endsection
@@ -53,8 +55,15 @@
 @section('script')
     {{-- @vite('resources/js/') --}}
     <script type="text/javascript">
-        async function deleteStudentRecord(student_id, book_id) {
-            console.log(student_id, book_id);
+        async function deleteStudentRecord(student_library_id) {
+            const res = await fetch(`/library/students-record?student_library_id=${student_library_id}`, {
+                method: "DELETE",
+                headers: {
+                    "X-CSRF-Token": "{{ csrf_token() }}"
+                }
+            });
+            const resText = await res.text();
+            document.getElementById('student-record-list-component').innerHTML = resText;
         }
     </script>
 @endsection

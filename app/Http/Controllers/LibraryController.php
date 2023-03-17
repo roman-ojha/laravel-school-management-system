@@ -52,11 +52,10 @@ class LibraryController extends Controller
         $library_students = Student::select(['id', 'name', 'roll', 'batch', 'faculty_id'])->with(['library' => function ($qLibrary) {
             $qLibrary->select(['book_id'])->with(['book' => function ($qBook) {
                 $qBook->select(['id', 'name']);
-            }]);
+            },]);
         }, 'faculty' => function ($qFaculty) {
             $qFaculty->select(['id', 'name']);
         }])->whereHas('library')->get();
-        error_log($library_students);
 
         return view("pages.library.student-records", ['library_students' => $library_students]);
     }
@@ -105,9 +104,22 @@ class LibraryController extends Controller
         }
     }
 
-    public function delete_student_record(Request $req, $student_id, $book_id)
+    public function delete_student_record(Request $req)
     {
-        error_log($student_id);
-        error_log($book_id);
+        try {
+            $student_library_id = $req->input('student_library_id');
+            $library_student =  LibraryStudent::find($student_library_id);
+            Library::find($library_student->library_id)->increment('remaining');
+            $library_student->delete();
+            $library_students = Student::select(['id', 'name', 'roll', 'batch', 'faculty_id'])->with(['library' => function ($qLibrary) {
+                $qLibrary->select(['book_id'])->with(['book' => function ($qBook) {
+                    $qBook->select(['id', 'name']);
+                },]);
+            }, 'faculty' => function ($qFaculty) {
+                $qFaculty->select(['id', 'name']);
+            }])->whereHas('library')->get();
+            return view('components.library.student-records', ['library_students' => $library_students]);
+        } catch (Exception $err) {
+        }
     }
 }
